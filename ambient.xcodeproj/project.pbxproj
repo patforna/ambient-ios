@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F14EEE716B0007100A25F35 /* NearbyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F14EEE616B0007100A25F35 /* NearbyTableViewController.m */; };
 		4FE4AEFC16A95080006E2915 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FE4AEFB16A95080006E2915 /* UIKit.framework */; };
 		4FE4AEFE16A95080006E2915 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FE4AEFD16A95080006E2915 /* Foundation.framework */; };
 		4FE4AF0016A95080006E2915 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FE4AEFF16A95080006E2915 /* CoreGraphics.framework */; };
@@ -17,13 +18,11 @@
 		4FE4AF1016A95080006E2915 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FE4AF0F16A95080006E2915 /* Default@2x.png */; };
 		4FE4AF1216A95080006E2915 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FE4AF1116A95080006E2915 /* Default-568h@2x.png */; };
 		4FE4AF1516A95080006E2915 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FE4AF1316A95080006E2915 /* MainStoryboard.storyboard */; };
-		4FE4AF1816A95080006E2915 /* SkeletonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FE4AF1716A95080006E2915 /* SkeletonViewController.m */; };
 		4FE4AF2016A95080006E2915 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FE4AF1F16A95080006E2915 /* SenTestingKit.framework */; };
 		4FE4AF2116A95080006E2915 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FE4AEFB16A95080006E2915 /* UIKit.framework */; };
 		4FE4AF2216A95080006E2915 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FE4AEFD16A95080006E2915 /* Foundation.framework */; };
 		4FE4AF2A16A95080006E2915 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4FE4AF2816A95080006E2915 /* InfoPlist.strings */; };
 		4FE4AF2D16A95080006E2915 /* ambientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FE4AF2C16A95080006E2915 /* ambientTests.m */; };
-		4FE4AF3816A95479006E2915 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FE4AF3716A95479006E2915 /* HomeViewController.m */; };
 		D0CFD9E791E8450CAE0F1BA8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B29B421EA5084931B85AF145 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4F14EEE516B0007100A25F35 /* NearbyTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearbyTableViewController.h; sourceTree = "<group>"; };
+		4F14EEE616B0007100A25F35 /* NearbyTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearbyTableViewController.m; sourceTree = "<group>"; };
 		4FE4AEF716A95080006E2915 /* ambient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ambient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FE4AEFB16A95080006E2915 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4FE4AEFD16A95080006E2915 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -52,16 +53,12 @@
 		4FE4AF0F16A95080006E2915 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		4FE4AF1116A95080006E2915 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		4FE4AF1416A95080006E2915 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		4FE4AF1616A95080006E2915 /* SkeletonViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SkeletonViewController.h; sourceTree = "<group>"; };
-		4FE4AF1716A95080006E2915 /* SkeletonViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SkeletonViewController.m; sourceTree = "<group>"; };
 		4FE4AF1E16A95080006E2915 /* ambientTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ambientTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FE4AF1F16A95080006E2915 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		4FE4AF2716A95080006E2915 /* ambientTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ambientTests-Info.plist"; sourceTree = "<group>"; };
 		4FE4AF2916A95080006E2915 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4FE4AF2B16A95080006E2915 /* ambientTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ambientTests.h; sourceTree = "<group>"; };
 		4FE4AF2C16A95080006E2915 /* ambientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ambientTests.m; sourceTree = "<group>"; };
-		4FE4AF3616A95479006E2915 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
-		4FE4AF3716A95479006E2915 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		B29B421EA5084931B85AF145 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3A4A49BFCE9420D9CB5E8EC /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -126,14 +123,10 @@
 		4FE4AF0116A95080006E2915 /* ambient */ = {
 			isa = PBXGroup;
 			children = (
-				4FE4AF0A16A95080006E2915 /* AppDelegate.h */,
-				4FE4AF0B16A95080006E2915 /* AppDelegate.m */,
 				4FE4AF1316A95080006E2915 /* MainStoryboard.storyboard */,
-				4FE4AF1616A95080006E2915 /* SkeletonViewController.h */,
-				4FE4AF1716A95080006E2915 /* SkeletonViewController.m */,
+				4F14EEE516B0007100A25F35 /* NearbyTableViewController.h */,
+				4F14EEE616B0007100A25F35 /* NearbyTableViewController.m */,
 				4FE4AF0216A95080006E2915 /* Supporting Files */,
-				4FE4AF3616A95479006E2915 /* HomeViewController.h */,
-				4FE4AF3716A95479006E2915 /* HomeViewController.m */,
 			);
 			path = ambient;
 			sourceTree = "<group>";
@@ -141,6 +134,8 @@
 		4FE4AF0216A95080006E2915 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4FE4AF0A16A95080006E2915 /* AppDelegate.h */,
+				4FE4AF0B16A95080006E2915 /* AppDelegate.m */,
 				4FE4AF0316A95080006E2915 /* ambient-Info.plist */,
 				4FE4AF0416A95080006E2915 /* InfoPlist.strings */,
 				4FE4AF0716A95080006E2915 /* main.m */,
@@ -298,8 +293,7 @@
 			files = (
 				4FE4AF0816A95080006E2915 /* main.m in Sources */,
 				4FE4AF0C16A95080006E2915 /* AppDelegate.m in Sources */,
-				4FE4AF1816A95080006E2915 /* SkeletonViewController.m in Sources */,
-				4FE4AF3816A95479006E2915 /* HomeViewController.m in Sources */,
+				4F14EEE716B0007100A25F35 /* NearbyTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

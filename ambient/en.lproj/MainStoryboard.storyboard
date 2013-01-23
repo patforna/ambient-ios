@@ -1,107 +1,81 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="bMn-jW-Ion">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="D3G-Uw-as7">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
     </dependencies>
     <scenes>
-        <!--Skeleton View Controller - Nearby-->
-        <scene sceneID="5">
+        <!--Nearby Table View Controller - Nearby-->
+        <scene sceneID="1it-hj-7CB">
             <objects>
-                <viewController id="2" customClass="SkeletonViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="3">
+                <tableViewController id="W7O-w9-hDw" customClass="NearbyTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="8lf-k4-cQK">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Vkd-tT-aj9">
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="2" id="mYJ-Gi-VQh"/>
-                                    <outlet property="delegate" destination="2" id="TQx-i7-O9b"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="Vkd-tT-aj9" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="1DA-dz-bVL"/>
-                            <constraint firstItem="Vkd-tT-aj9" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="EGN-6g-9i9"/>
-                            <constraint firstItem="Vkd-tT-aj9" firstAttribute="top" secondItem="3" secondAttribute="top" type="default" id="jPn-vn-KWl"/>
-                            <constraint firstItem="Vkd-tT-aj9" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" type="default" id="x8l-25-G91"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Nearby" id="U6W-Sb-VeH"/>
-                    <connections>
-                        <outlet property="tableView" destination="Vkd-tT-aj9" id="G2w-on-ugJ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Nearby Cell" textLabel="6nV-E0-3d5" detailTextLabel="gXi-km-owl" style="IBUITableViewCellStyleSubtitle" id="sKp-zU-Hxm">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6nV-E0-3d5">
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gXi-km-owl">
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="W7O-w9-hDw" id="kxO-fS-5P5"/>
+                            <outlet property="delegate" destination="W7O-w9-hDw" id="AWp-p1-565"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Nearby" id="rWq-nr-vzZ">
+                        <barButtonItem key="rightBarButtonItem" title="Refresh" id="3wj-Iz-hQH">
+                            <connections>
+                                <action selector="refresh:" destination="W7O-w9-hDw" id="XBC-Ub-AFH"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tAd-cL-8hO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1103" y="-686"/>
-        </scene>
-        <!--Home View Controller - Home-->
-        <scene sceneID="v99-bW-epe">
-            <objects>
-                <viewController id="NT1-s3-iaF" customClass="HomeViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="vbD-nd-F0g">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bnb-w2-VU3">
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Load Nearby Skeletons">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="2" kind="push" identifier="LoadNearbySkeletons" id="ejq-k1-tx3"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="Bnb-w2-VU3" firstAttribute="top" secondItem="vbD-nd-F0g" secondAttribute="top" constant="252" id="HZi-DH-zFH"/>
-                            <constraint firstAttribute="trailing" secondItem="Bnb-w2-VU3" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="OWD-vN-tPa"/>
-                            <constraint firstItem="Bnb-w2-VU3" firstAttribute="leading" secondItem="vbD-nd-F0g" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="y5q-Nc-8rb"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Home" id="nGK-aB-pFF"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CHE-Tk-AlS" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="673" y="-686"/>
+            <point key="canvasLocation" x="973" y="-325"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="gWr-IH-Eyx">
+        <scene sceneID="XYC-NZ-Mu5">
             <objects>
-                <navigationController id="bMn-jW-Ion" sceneMemberID="viewController">
+                <navigationController id="D3G-Uw-as7" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="9Tb-1J-NE7">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gR6-ee-bIh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="NT1-s3-iaF" kind="relationship" relationship="rootViewController" id="xRD-aJ-OH2"/>
+                        <segue destination="W7O-w9-hDw" kind="relationship" relationship="rootViewController" id="TmZ-BF-fMN"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5cM-YG-BCA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RTk-q8-LGA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="238" y="-686"/>
+            <point key="canvasLocation" x="447" y="-325"/>
         </scene>
     </scenes>
     <classes>
-        <class className="HomeViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/HomeViewController.h"/>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="SkeletonViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SkeletonViewController.h"/>
+        <class className="NearbyTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NearbyTableViewController.h"/>
             <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+                <relationship kind="action" name="refresh:"/>
             </relationships>
         </class>
     </classes>
