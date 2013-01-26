@@ -13,11 +13,11 @@
 
 @implementation NearbyTableViewController
 
-@synthesize skeletons = _skeletons;
+@synthesize nearby = _nearby;
 
-- (void)setSkeletons:(NSArray *)skeletons
+- (void)setNearby:(NSArray *)nearby
 {
-    _skeletons = skeletons;
+    _nearby = nearby;
     [self.tableView reloadData];
 }
 
@@ -26,12 +26,12 @@
     [spinner startAnimating];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
     
-    NSURL *url = [NSURL URLWithString:BASE_URL];
+    NSURL *url = [NSURL URLWithString:[BASE_URL stringByAppendingString:@"/search/nearby?location=51.515874,-0.125613"]];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         self.navigationItem.rightBarButtonItem = sender;
-        self.skeletons = JSON;
+        self.nearby = [JSON objectForKey:@"nearby"];
     } failure:nil];
     
     [operation start];
@@ -41,7 +41,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.skeletons count];
+    return [self.nearby count];
 }
 
 #pragma mark - Table view delegate
@@ -50,9 +50,9 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Nearby Cell"];
     
-    NSDictionary *skeleton = [self.skeletons objectAtIndex:indexPath.row];
-    cell.textLabel.text = [skeleton valueForKey:@"name"];
-    cell.detailTextLabel.text = [skeleton valueForKey:@"job"];
+    NSDictionary *item = [self.nearby objectAtIndex:indexPath.row];
+    cell.textLabel.text = [[item objectForKey:@"user"] valueForKey:@"name"];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@m away", [item objectForKey:@"distance"]];
     return cell;
 }
 

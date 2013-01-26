@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface NearbyTableViewController : UITableViewController
-@property (nonatomic, strong) NSArray * skeletons;
+@property (nonatomic, strong) NSArray * nearby;
 @end
