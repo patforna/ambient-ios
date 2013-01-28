@@ -12,6 +12,10 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <activityIndicatorView key="tableFooterView" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" animating="YES" style="gray" id="fbG-gI-4KP">
+                            <rect key="frame" x="0.0" y="66" width="320" height="20"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </activityIndicatorView>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Nearby Cell" textLabel="6nV-E0-3d5" detailTextLabel="gXi-km-owl" style="IBUITableViewCellStyleSubtitle" id="sKp-zU-Hxm">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
@@ -41,12 +45,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Nearby" id="rWq-nr-vzZ">
-                        <barButtonItem key="rightBarButtonItem" title="Refresh" id="3wj-Iz-hQH">
-                            <connections>
-                                <action selector="refresh:" destination="W7O-w9-hDw" id="XBC-Ub-AFH"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="DXY-ot-Noq"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="spinner" destination="fbG-gI-4KP" id="o7X-qF-bhd"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tAd-cL-8hO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -75,7 +78,7 @@
         <class className="NearbyTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NearbyTableViewController.h"/>
             <relationships>
-                <relationship kind="action" name="refresh:"/>
+                <relationship kind="outlet" name="spinner" candidateClass="UIActivityIndicatorView"/>
             </relationships>
         </class>
     </classes>

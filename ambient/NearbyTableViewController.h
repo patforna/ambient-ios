@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface NearbyTableViewController : UITableViewController
-@property (nonatomic, strong) NSArray * nearby;
+@interface NearbyTableViewController : UITableViewController <CLLocationManagerDelegate>
+@property (strong, nonatomic) NSArray * nearby;
 @end

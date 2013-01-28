@@ -8,46 +8,67 @@
 
 #import "NearbyTableViewController.h"
 #import "AFJSONRequestOperation.h"
+#import "CoreLocation/CoreLocation.h"
 
 #define BASE_URL @"http://api.discoverambient.com"
 
+@interface NearbyTableViewController()
+@property (strong, nonatomic) CLLocationManager *locationManager;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
+@end
+
 @implementation NearbyTableViewController
 
-@synthesize nearby = _nearby;
-
-- (void)setNearby:(NSArray *)nearby
-{
+- (void)setNearby:(NSArray *)nearby {
     _nearby = nearby;
     [self.tableView reloadData];
 }
 
-- (IBAction)refresh:(id)sender {
-    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    [spinner startAnimating];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
+- (CLLocationManager *)locationManager {
+    if (_locationManager == nil) {
+        _locationManager = [[CLLocationManager alloc] init];
+        _locationManager.delegate = self;
+        _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        _locationManager.distanceFilter = 10; //movement threshold for new events
+        _locationManager.activityType = CLActivityTypeFitness;
+        _locationManager.pausesLocationUpdatesAutomatically = true;
+    }
+    return _locationManager;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self.locationManager startUpdatingLocation];
+}
+
+- (void)refresh:(CLLocationCoordinate2D) location {
+    [self.spinner startAnimating];
     
-    NSURL *url = [NSURL URLWithString:[BASE_URL stringByAppendingString:@"/search/nearby?location=51.515874,-0.125613"]];
+    NSString *path = [NSString stringWithFormat:@"/search/nearby?location=%+.6f,%+.6f", location.latitude, location.longitude];
+    NSLog(@"Calling %@\n", path);
+    
+    NSURL *url = [NSURL URLWithString:[BASE_URL stringByAppendingString:path]];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        self.navigationItem.rightBarButtonItem = sender;
-        self.nearby = [JSON objectForKey:@"nearby"];
-    } failure:nil];
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+            self.nearby = [JSON objectForKey:@"nearby"];
+            [self.spinner stopAnimating];
+        }
+        failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+            NSLog(@"Unable to retrieve data from %@: %@", url, error);
+        }];
     
     [operation start];
 }
 
 #pragma mark - Table view data source
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.nearby count];
 }
 
 #pragma mark - Table view delegate
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Nearby Cell"];
     
     NSDictionary *item = [self.nearby objectAtIndex:indexPath.row];
@@ -56,4 +77,42 @@
     return cell;
 }
 
+#pragma mark - CLLocationManagerDelegate
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    [self refresh:manager.location.coordinate];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+	NSLog(@"Unable to retrieve location: %@\n", error);
+}
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
