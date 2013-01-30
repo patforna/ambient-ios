@@ -6,25 +6,26 @@
 //  Copyright (c) 2013 Patric Fornasier. All rights reserved.
 //
 
-#import "NearbyTableViewController.h"
-#import "AFJSONRequestOperation.h"
+#import "AFNetworking.h"
 #import "CoreLocation/CoreLocation.h"
+#import "NearbyTableViewController.h"
 
-#define BASE_URL @"http://api.discoverambient.com"
+#define BASE_URL @"http://api.discoverambient.com/"
 
 @interface NearbyTableViewController()
-@property (strong, nonatomic) CLLocationManager *locationManager;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
+@property (strong, nonatomic) CLLocationManager* locationManager;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView* spinner;
+@property (strong, nonatomic) AFHTTPClient* httpClient;
 @end
 
 @implementation NearbyTableViewController
 
-- (void)setNearby:(NSArray *)nearby {
+- (void) setNearby:(NSArray*) nearby {
     _nearby = nearby;
     [self.tableView reloadData];
 }
 
-- (CLLocationManager *)locationManager {
+- (CLLocationManager*) locationManager {
     if (_locationManager == nil) {
         _locationManager = [[CLLocationManager alloc] init];
         _locationManager.delegate = self;
@@ -36,53 +37,80 @@
     return _locationManager;
 }
 
-- (void)viewDidLoad {
+- (AFHTTPClient*) httpClient {
+    if (_httpClient == nil) {
+        NSURL *baseURL = [NSURL URLWithString:BASE_URL];
+        _httpClient = [[AFHTTPClient alloc] initWithBaseURL:baseURL];
+    }
+    
+    return _httpClient;
+}
+
+- (void) viewDidLoad {
     [super viewDidLoad];
     [self.locationManager startUpdatingLocation];
 }
 
-- (void)refresh:(CLLocationCoordinate2D) location {
+- (void) refresh:(CLLocationCoordinate2D) location {
+    [self retrieveNearbyUsers:location];
+    [self checkin:location];
+}
+
+- (void) retrieveNearbyUsers:(CLLocationCoordinate2D) location {
     [self.spinner startAnimating];
     
-    NSString *path = [NSString stringWithFormat:@"/search/nearby?location=%+.6f,%+.6f", location.latitude, location.longitude];
-    NSLog(@"Calling %@\n", path);
+    NSURL* url = [self urlFor:@"search/nearby":location];
+    NSURLRequest* request = [NSURLRequest requestWithURL:url];
+    NSLog(@"About to retrieve nearby users from: %@\n", url);
     
-    NSURL *url = [NSURL URLWithString:[BASE_URL stringByAppendingString:path]];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
-        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+    AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+        success:^(NSURLRequest* request, NSHTTPURLResponse* response, id JSON) {
             self.nearby = [JSON objectForKey:@"nearby"];
             [self.spinner stopAnimating];
         }
-        failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-            NSLog(@"Unable to retrieve data from %@: %@", url, error);
+        failure:^(NSURLRequest* request, NSHTTPURLResponse* response, NSError* error, id JSON) {
+            NSLog(@"Unable to retrieve nearby users: %@", error.localizedDescription);
         }];
     
     [operation start];
 }
 
+- (void) checkin:(CLLocationCoordinate2D) location {
+    NSURL* url = [self urlFor:@"checkins":location];
+    NSLog(@"About to check in to: %@\n", url);
+    
+    [self.httpClient postPath:[url relativeString] parameters:nil success:^(AFHTTPRequestOperation* operation, id responseObject) {}
+    failure:^(AFHTTPRequestOperation* operation, NSError* error) {
+        NSLog(@"Unable to check in: %@", error.localizedDescription);
+    }];
+}
+
+- (NSURL*) urlFor:(NSString*) path :(CLLocationCoordinate2D) location {
+    NSString* url = [NSString stringWithFormat:@"%@%@?location=%+.6f,%+.6f", BASE_URL, path, location.latitude, location.longitude];
+    return [NSURL URLWithString:url];
+}
+
 #pragma mark - Table view data source
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger) tableView:(UITableView*) tableView numberOfRowsInSection:(NSInteger) section {
     return [self.nearby count];
 }
 
 #pragma mark - Table view delegate
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Nearby Cell"];
+- (UITableViewCell*) tableView:(UITableView*) tableView cellForRowAtIndexPath:(NSIndexPath*) indexPath {
+    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"Nearby Cell"];
     
-    NSDictionary *item = [self.nearby objectAtIndex:indexPath.row];
+    NSDictionary* item = [self.nearby objectAtIndex:indexPath.row];
     cell.textLabel.text = [[item objectForKey:@"user"] valueForKey:@"name"];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@m away", [item objectForKey:@"distance"]];
     return cell;
 }
 
 #pragma mark - CLLocationManagerDelegate
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+- (void) locationManager:(CLLocationManager*) manager didUpdateLocations:(NSArray*) locations {
     [self refresh:manager.location.coordinate];
 }
 
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+- (void) locationManager:(CLLocationManager*) manager didFailWithError:(NSError*) error {
 	NSLog(@"Unable to retrieve location: %@\n", error);
 }
 @end
