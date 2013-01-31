@@ -4,6 +4,61 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
+        <!--Login View Controller - Login-->
+        <scene sceneID="gWI-42-e3I">
+            <objects>
+                <viewController id="dEK-V5-QNY" customClass="LoginViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OIy-1m-gc7">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zFe-NZ-ifY">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="245" id="1o5-MR-jic"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Login using FB">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="performLogin:" destination="dEK-V5-QNY" eventType="touchUpInside" id="fT1-0m-cUp"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1bx-nf-sOT">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Logout">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="performLogout:" destination="dEK-V5-QNY" eventType="touchUpInside" id="COn-MV-COx"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="1bx-nf-sOT" firstAttribute="centerX" secondItem="OIy-1m-gc7" secondAttribute="centerX" type="default" id="3Hh-ud-CVP"/>
+                            <constraint firstItem="1bx-nf-sOT" firstAttribute="centerX" secondItem="zFe-NZ-ifY" secondAttribute="centerX" type="default" id="4bo-m7-zC4"/>
+                            <constraint firstAttribute="bottom" secondItem="1bx-nf-sOT" secondAttribute="bottom" constant="41" id="NOk-wD-N0R"/>
+                            <constraint firstItem="zFe-NZ-ifY" firstAttribute="top" secondItem="OIy-1m-gc7" secondAttribute="top" constant="230" id="VJC-ZT-pSz"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Login" id="kx6-p8-mfn"/>
+                    <connections>
+                        <segue destination="GKi-vT-iq3" kind="push" identifier="ShowNearbySegue" id="Q12-nJ-tbV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7MI-Z6-nea" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1396" y="-327"/>
+        </scene>
         <!--Nearby Table View Controller - Nearby-->
         <scene sceneID="Fnz-vZ-OIe">
             <objects>
@@ -51,7 +106,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q4V-ij-zX4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1460" y="-327"/>
+            <point key="canvasLocation" x="1840" y="-327"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="HCU-pV-gPq">
@@ -64,7 +119,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="GKi-vT-iq3" kind="relationship" relationship="rootViewController" id="92k-H0-MUQ"/>
+                        <segue destination="dEK-V5-QNY" kind="relationship" relationship="rootViewController" id="mC7-wi-WQG"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v0H-HN-zHb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -73,6 +128,16 @@
         </scene>
     </scenes>
     <classes>
+        <class className="LoginViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="performLogin:"/>
+                <relationship kind="action" name="performLogout:"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
         <class className="NearbyTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NearbyTableViewController.h"/>
             <relationships>

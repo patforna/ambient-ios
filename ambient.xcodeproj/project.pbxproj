@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4F14EEE716B0007100A25F35 /* NearbyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F14EEE616B0007100A25F35 /* NearbyTableViewController.m */; };
 		4F98554316B6984D00C35905 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F98554216B6984D00C35905 /* CoreLocation.framework */; };
+		4FD2380B16BABEBA00803C0F /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD2380A16BABEBA00803C0F /* LoginViewController.m */; };
 		4FE4AEFC16A95080006E2915 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FE4AEFB16A95080006E2915 /* UIKit.framework */; };
 		4FE4AEFE16A95080006E2915 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FE4AEFD16A95080006E2915 /* Foundation.framework */; };
 		4FE4AF0016A95080006E2915 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FE4AEFF16A95080006E2915 /* CoreGraphics.framework */; };
@@ -41,6 +42,8 @@
 		4F14EEE516B0007100A25F35 /* NearbyTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearbyTableViewController.h; sourceTree = "<group>"; };
 		4F14EEE616B0007100A25F35 /* NearbyTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearbyTableViewController.m; sourceTree = "<group>"; };
 		4F98554216B6984D00C35905 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		4FD2380916BABEBA00803C0F /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		4FD2380A16BABEBA00803C0F /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		4FE4AEF716A95080006E2915 /* ambient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ambient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FE4AEFB16A95080006E2915 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4FE4AEFD16A95080006E2915 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -128,6 +131,8 @@
 			isa = PBXGroup;
 			children = (
 				4FE4AF1316A95080006E2915 /* MainStoryboard.storyboard */,
+				4FD2380916BABEBA00803C0F /* LoginViewController.h */,
+				4FD2380A16BABEBA00803C0F /* LoginViewController.m */,
 				4F14EEE516B0007100A25F35 /* NearbyTableViewController.h */,
 				4F14EEE616B0007100A25F35 /* NearbyTableViewController.m */,
 				4FE4AF0216A95080006E2915 /* Supporting Files */,
@@ -298,6 +303,7 @@
 				4FE4AF0816A95080006E2915 /* main.m in Sources */,
 				4FE4AF0C16A95080006E2915 /* AppDelegate.m in Sources */,
 				4F14EEE716B0007100A25F35 /* NearbyTableViewController.m in Sources */,
+				4FD2380B16BABEBA00803C0F /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

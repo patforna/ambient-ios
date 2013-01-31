@@ -7,13 +7,73 @@
 //
 
 #import "AppDelegate.h"
+#import <FacebookSDK/FacebookSDK.h>
+
+@interface AppDelegate()
+- (BOOL) isLoggedIn;
+@end
 
 @implementation AppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    // Override point for customization after application launch.
+#pragma mark UIApplicationDelegate
+
+- (BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    if ([self isLoggedIn]) {
+        [self openSession];
+        // TODO: skip login view
+        NSLog(@"Already logged in");
+    }
     return YES;
+}
+
+// handle the facebook login callback
+- (BOOL) application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [FBSession.activeSession handleOpenURL:url];
+}
+
+// handle activation of app
+- (void) applicationDidBecomeActive:(UIApplication *)application	{
+    // TODO: need to properly handle activation of the application with regards to SSO
+    [FBSession.activeSession handleDidBecomeActive];
+}
+
+#pragma mark Facebook Login
+
+- (void) sessionStateChanged:(FBSession *)session state:(FBSessionState) state error:(NSError *)error {
+    switch (state) {
+        case FBSessionStateOpen: {
+            NSLog(@"Login successful.");
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginSuccessful" object:nil];
+        }
+            break;
+        case FBSessionStateClosed:
+            NSLog(@"Session closed.");
+            break;
+        case FBSessionStateClosedLoginFailed:
+            NSLog(@"Login failed.");
+            [FBSession.activeSession closeAndClearTokenInformation];            
+            break;
+        default:
+            break;
+    }
+    
+    if (error) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];        
+    }
+}
+
+- (void) openSession {
+    [FBSession openActiveSessionWithReadPermissions:nil allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
+        [self sessionStateChanged:session state:state error:error];
+    }];
+}
+
+
+#pragma mark private
+
+- (BOOL) isLoggedIn {
+    return FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded;
 }
 
 @end
