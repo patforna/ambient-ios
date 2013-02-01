@@ -10,15 +10,11 @@
 
 - (IBAction) performLogin:(id)sender {
     AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
-    [appDelegate openSession];
+    [appDelegate loginUsingFacebook];
 }
 
 - (IBAction)performLogout:(id)sender {
     [FBSession.activeSession closeAndClearTokenInformation];
-}
-
-- (void) handleLoginSuccess:(NSNotification *)pNotification {
-    [self performSegueWithIdentifier: @"ShowNearbySegue" sender: self];
 }
 
 - (void) loginFailed { // FIXME currently unused

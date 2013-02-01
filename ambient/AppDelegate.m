@@ -1,11 +1,3 @@
-//
-//  AppDelegate.m
-//  ambient
-//
-//  Created by Patric Fornasier on 18/01/2013.
-//  Copyright (c) 2013 Patric Fornasier. All rights reserved.
-//
-
 #import "AppDelegate.h"
 #import <FacebookSDK/FacebookSDK.h>
 
@@ -19,7 +11,7 @@
 
 - (BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     if ([self isLoggedIn]) {
-        [self openSession];
+        [self loginUsingFacebook];
         // TODO: skip login view
         NSLog(@"Already logged in");
     }
@@ -40,12 +32,13 @@
 #pragma mark Facebook Login
 
 - (void) sessionStateChanged:(FBSession *)session state:(FBSessionState) state error:(NSError *)error {
+    
     switch (state) {
         case FBSessionStateOpen: {
             NSLog(@"Login successful.");
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginSuccessful" object:nil];
-        }
-            break;
+            UINavigationController *navigationController = (UINavigationController*)self.window.rootViewController;
+            [navigationController.topViewController performSegueWithIdentifier:@"NearbySegue" sender:self];
+        } break;
         case FBSessionStateClosed:
             NSLog(@"Session closed.");
             break;
@@ -63,12 +56,11 @@
     }
 }
 
-- (void) openSession {
+- (void) loginUsingFacebook {
     [FBSession openActiveSessionWithReadPermissions:nil allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
         [self sessionStateChanged:session state:state error:error];
     }];
 }
-
 
 #pragma mark private
 
