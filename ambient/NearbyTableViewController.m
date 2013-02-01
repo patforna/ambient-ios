@@ -49,7 +49,7 @@
 }
 
 - (void) retrieveNearbyUsers:(CLLocationCoordinate2D) location {
-    [self.spinner startAnimating];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:true];
     
     NSURL* url = [self urlFor:@"search/nearby":location];
     NSURLRequest* request = [NSURLRequest requestWithURL:url];
@@ -58,7 +58,7 @@
     AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
         success:^(NSURLRequest* request, NSHTTPURLResponse* response, id JSON) {
             self.nearbyResults = [JSON objectForKey:@"nearby"];
-            [self.spinner stopAnimating];
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:false];
         }
         failure:^(NSURLRequest* request, NSHTTPURLResponse* response, NSError* error, id JSON) {
             NSLog(@"Unable to retrieve nearby users: %@", error.localizedDescription);

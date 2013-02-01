@@ -10,6 +10,8 @@
 #pragma mark UIApplicationDelegate
 
 - (BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [application setNetworkActivityIndicatorVisible:true];
+    
     if ([self isLoggedIn]) {
         [self loginUsingFacebook];
         // TODO: skip login view

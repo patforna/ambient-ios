@@ -67,10 +67,6 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <activityIndicatorView key="tableFooterView" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" animating="YES" style="gray" id="hXf-26-0m4">
-                            <rect key="frame" x="0.0" y="66" width="320" height="20"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </activityIndicatorView>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Nearby Cell" textLabel="c3y-99-vcD" detailTextLabel="LdX-Zx-8Px" style="IBUITableViewCellStyleSubtitle" id="d4o-Xq-uYG">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
@@ -100,9 +96,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Nearby" id="ib1-jp-PTO"/>
-                    <connections>
-                        <outlet property="spinner" destination="hXf-26-0m4" id="ygi-kF-Isi"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q4V-ij-zX4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
