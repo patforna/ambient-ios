@@ -1,11 +1,3 @@
-//
-//  NearbyTableViewController.m
-//  ambient
-//
-//  Created by Patric Fornasier on 23/01/2013.
-//  Copyright (c) 2013 Patric Fornasier. All rights reserved.
-//
-
 #import "AFNetworking.h"
 #import "CoreLocation/CoreLocation.h"
 #import "NearbyTableViewController.h"
@@ -20,8 +12,8 @@
 
 @implementation NearbyTableViewController
 
-- (void) setNearby:(NSArray*) nearby {
-    _nearby = nearby;
+- (void) setNearbyResults:(NSArray*) nearbyResults {
+    _nearbyResults = nearbyResults;
     [self.tableView reloadData];
 }
 
@@ -51,8 +43,8 @@
     [self.locationManager startUpdatingLocation];
 }
 
-- (void) refresh:(CLLocationCoordinate2D) location {
-    [self retrieveNearbyUsers:location];
+- (void) handleLocationUpdate:(CLLocationCoordinate2D) location {
+    if (self.nearbyResults == nil) [self retrieveNearbyUsers:location];
     [self checkin:location];
 }
 
@@ -65,7 +57,7 @@
     
     AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
         success:^(NSURLRequest* request, NSHTTPURLResponse* response, id JSON) {
-            self.nearby = [JSON objectForKey:@"nearby"];
+            self.nearbyResults = [JSON objectForKey:@"nearby"];
             [self.spinner stopAnimating];
         }
         failure:^(NSURLRequest* request, NSHTTPURLResponse* response, NSError* error, id JSON) {
@@ -92,14 +84,14 @@
 
 #pragma mark - Table view data source
 - (NSInteger) tableView:(UITableView*) tableView numberOfRowsInSection:(NSInteger) section {
-    return [self.nearby count];
+    return [self.nearbyResults count];
 }
 
 #pragma mark - Table view delegate
 - (UITableViewCell*) tableView:(UITableView*) tableView cellForRowAtIndexPath:(NSIndexPath*) indexPath {
     UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"Nearby Cell"];
     
-    NSDictionary* item = [self.nearby objectAtIndex:indexPath.row];
+    NSDictionary* item = [self.nearbyResults objectAtIndex:indexPath.row];
     cell.textLabel.text = [[item objectForKey:@"user"] valueForKey:@"name"];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@m away", [item objectForKey:@"distance"]];
     return cell;
@@ -107,7 +99,7 @@
 
 #pragma mark - CLLocationManagerDelegate
 - (void) locationManager:(CLLocationManager*) manager didUpdateLocations:(NSArray*) locations {
-    [self refresh:manager.location.coordinate];
+    [self handleLocationUpdate:manager.location.coordinate];
 }
 
 - (void) locationManager:(CLLocationManager*) manager didFailWithError:(NSError*) error {
