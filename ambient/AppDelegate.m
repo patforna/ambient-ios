@@ -13,9 +13,8 @@
     [application setNetworkActivityIndicatorVisible:true];
     
     if ([self isLoggedIn]) {
-        [self loginUsingFacebook];
-        // TODO: skip login view
         NSLog(@"Already logged in");
+        [self handleLoginSuccess];
     }
     return YES;
 }
@@ -38,8 +37,7 @@
     switch (state) {
         case FBSessionStateOpen: {
             NSLog(@"Login successful.");
-            UINavigationController *navigationController = (UINavigationController*)self.window.rootViewController;
-            [navigationController.topViewController performSegueWithIdentifier:@"NearbySegue" sender:self];
+            [self handleLoginSuccess];
         } break;
         case FBSessionStateClosed:
             NSLog(@"Session closed.");
@@ -62,6 +60,11 @@
     [FBSession openActiveSessionWithReadPermissions:nil allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
         [self sessionStateChanged:session state:state error:error];
     }];
+}
+
+- (void) handleLoginSuccess {    
+    UINavigationController *navigationController = (UINavigationController*)self.window.rootViewController;
+    [navigationController.topViewController performSegueWithIdentifier:@"NearbySegue" sender:self];
 }
 
 #pragma mark private
