@@ -6,7 +6,6 @@
 
 @interface NearbyTableViewController()
 @property (strong, nonatomic) CLLocationManager* locationManager;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView* spinner;
 @property (strong, nonatomic) AFHTTPClient* httpClient;
 @end
 
