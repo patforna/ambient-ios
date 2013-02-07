@@ -71,15 +71,10 @@
     // FIXME hack
     AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
     
-    NSString *path = @"checkins";
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                            appDelegate.user, @"user_id",
-                            [NSString stringWithFormat:@"%+.6f,%+.6f", location.latitude, location.longitude], @"location",
-                            nil];
-    
-    NSLog(@"About to call: %@ with params: %@\n", path, params);
+    NSString *path = [NSString stringWithFormat:@"checkins?user_id=%@&location=%+.6f,%+.6f", appDelegate.user, location.latitude, location.longitude];
+    NSLog(@"About to call: %@\n", path);
 
-    [self.httpClient postPath:path parameters:params success:^(AFHTTPRequestOperation* operation, id responseObject) {}
+    [self.httpClient postPath:path parameters:nil success:^(AFHTTPRequestOperation* operation, id responseObject) {}
     failure:^(AFHTTPRequestOperation* operation, NSError* error) {
         NSLog(@"Unable to check in: %@", error.localizedDescription);
     }];

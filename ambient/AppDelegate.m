@@ -10,6 +10,8 @@
     if (_httpClient == nil) {
         NSURL *baseURL = [NSURL URLWithString:BASE_URL];
         _httpClient = [[AFHTTPClient alloc] initWithBaseURL:baseURL];
+        [_httpClient registerHTTPOperationClass:[AFJSONRequestOperation class]];
+        [_httpClient setDefaultHeader:@"Accept" value:@"application/json"];
     }
     
     return _httpClient;
@@ -84,6 +86,7 @@
 
 - (void) handleLoginFailed:(NSString *)errorMessage {
     [FBSession.activeSession closeAndClearTokenInformation];
+    NSLog(@"Login failed. Error: %@", errorMessage);
     [self showLoginScreen];
 }
 
@@ -122,45 +125,37 @@
 }
 
 - (void) loadOrCreateUserFrom:(NSDictionary<FBGraphUser> *)fbUser {
-    NSString* url = [NSString stringWithFormat:@"%@/users/search?fbid=%@", BASE_URL, fbUser.id];
-    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-    NSLog(@"About to call: %@\n", url);
-    
-    AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
-        success:^(NSURLRequest* request, NSHTTPURLResponse* response, id json) {
+    NSString* path = [NSString stringWithFormat:@"/users/search?fbid=%@", fbUser.id];
+    NSLog(@"About to call: %@\n", path);
+
+    [self.httpClient getPath:path parameters:nil
+        success:^(AFHTTPRequestOperation* operation, id json) {
             NSLog(@"Successfully loaded user");
             NSString *user = [[json objectForKey:@"user"] valueForKey:@"id"];
             [self handleLoginSuccessful:user];
         }
-        failure:^(NSURLRequest* request, NSHTTPURLResponse* response, NSError* error, id json) {
+        failure:^(AFHTTPRequestOperation* operation, NSError* error) {
             // TODO check for 404
             NSLog(@"Unable to load user: %@. Will try to create next.", error.localizedDescription);
             [self createUserFrom:fbUser];
-        }];
-    
-    [operation start];
+        }
+     ];
 }
 
 - (void) createUserFrom:(NSDictionary<FBGraphUser> *)fbUser {
-    NSString *path = @"/users";
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                            fbUser.first_name, @"first",
-                            fbUser.last_name, @"last",
-                            fbUser.id, @"fbid",
-                            nil];
-    
-    NSLog(@"About to call: %@ with params: %@\n", path, params);
-    
-    [self.httpClient postPath:path parameters:params
+    NSString *path = [NSString stringWithFormat:@"/users?first=%@&last=%@&fbid=%@", fbUser.first_name, fbUser.last_name, fbUser.id];
+    NSLog(@"About to call: %@\n", path);
+  
+    [self.httpClient postPath:path parameters:nil
         success:^(AFHTTPRequestOperation* operation, id json) {
-            NSLog(@"Successfully created user");
+            NSLog(@"Successfully created user.");
             NSString *user = [[json objectForKey:@"user"] valueForKey:@"id"];
             [self handleLoginSuccessful:user];
         }
         failure:^(AFHTTPRequestOperation* operation, NSError* error) {
             [self handleLoginFailed:[NSString stringWithFormat:@"Unable to create user: %@", error.localizedDescription]];
-        }];
-
+        }
+    ];
 }
 
 
