@@ -1,7 +1,20 @@
 #import "AppDelegate.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import "AFNetworking.h"
+
+#define BASE_URL @"http://api.discoverambient.com"
 
 @implementation AppDelegate
+
+- (AFHTTPClient*) httpClient {
+    if (_httpClient == nil) {
+        NSURL *baseURL = [NSURL URLWithString:BASE_URL];
+        _httpClient = [[AFHTTPClient alloc] initWithBaseURL:baseURL];
+    }
+    
+    return _httpClient;
+}
+
 
 #pragma mark UIApplicationDelegate
 
@@ -32,23 +45,20 @@
     switch (state) {
         case FBSessionStateOpen: {
             NSLog(@"FB Session opened.");
-            [self handleLoginSuccess];
+            [self handleSessionOpen];
         } break;
         case FBSessionStateClosed:
             NSLog(@"FB Session closed.");
             break;
         case FBSessionStateClosedLoginFailed:
-            NSLog(@"FB Login failed.");
-            [self handleLoginFailure];
+            [self handleLoginFailed:@"Login failed"];
             break;
         default:
             break;
     }
     
     if (error) {
-        [self showLoginScreen];
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Oops..." message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alertView show];        
+        [self handleLoginFailed:error.localizedDescription];
     }
 }
 
@@ -62,12 +72,17 @@
     return FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded;
 }
 
-- (void) handleLoginSuccess {
-    [self fetchUserDetails]; // FIXME move
+- (void) handleSessionOpen {
+    [self fetchUserDetails]; // FIXME move    
+}
+
+- (void) handleLoginSuccessful:(NSString *)user {
+    self.user = user;
+    NSLog(@"Login successful. Userid: %@", user);
     [self segueTo:@"NearbySegue"];
 }
 
-- (void) handleLoginFailure {
+- (void) handleLoginFailed:(NSString *)errorMessage {
     [FBSession.activeSession closeAndClearTokenInformation];
     [self showLoginScreen];
 }
@@ -75,6 +90,11 @@
 - (void) showLoginScreen {
     UINavigationController *navigationController = (UINavigationController*)self.window.rootViewController;
     [navigationController popToRootViewControllerAnimated:false];
+}
+
+- (void) showError:(NSString *)errorMessage {
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Oops..." message:errorMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alertView show];
 }
 
 - (void) segueTo:(NSString *)segueId {
@@ -88,18 +108,60 @@
 - (void) fetchUserDetails {
     if (FBSession.activeSession.isOpen) {
         NSLog(@"About to fetch user details...");
-        [[FBRequest requestForMe] startWithCompletionHandler:^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
+        [[FBRequest requestForMe] startWithCompletionHandler:^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *fbUser, NSError *error) {
              if (!error) {
-                NSLog(@"user.firstName = %@, user.lastName = %@, user.id = %@", user.first_name, user.last_name, user.id);
+                 NSLog(@"Got some data from FB: user.firstName = %@, user.lastName = %@, user.id = %@", fbUser.first_name, fbUser.last_name, fbUser.id);
+                 [self loadOrCreateUserFrom:fbUser];
              } else {
-                NSLog(@"Error retrieving user details: %@", error.localizedDescription);
-                [self handleLoginFailure];
+                [self handleLoginFailed:[NSString stringWithFormat:@"Error retrieving user details: %@", error.localizedDescription]];
              }
          }];
     } else {
-        NSLog(@"No active open session =(");
-        [self handleLoginFailure];        
+        [self handleLoginFailed:@"No active open session =("];
     }
 }
+
+- (void) loadOrCreateUserFrom:(NSDictionary<FBGraphUser> *)fbUser {
+    NSString* url = [NSString stringWithFormat:@"%@/users/search?fbid=%@", BASE_URL, fbUser.id];
+    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    NSLog(@"About to call: %@\n", url);
+    
+    AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+        success:^(NSURLRequest* request, NSHTTPURLResponse* response, id json) {
+            NSLog(@"Successfully loaded user");
+            NSString *user = [[json objectForKey:@"user"] valueForKey:@"id"];
+            [self handleLoginSuccessful:user];
+        }
+        failure:^(NSURLRequest* request, NSHTTPURLResponse* response, NSError* error, id json) {
+            // TODO check for 404
+            NSLog(@"Unable to load user: %@. Will try to create next.", error.localizedDescription);
+            [self createUserFrom:fbUser];
+        }];
+    
+    [operation start];
+}
+
+- (void) createUserFrom:(NSDictionary<FBGraphUser> *)fbUser {
+    NSString *path = @"/users";
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            fbUser.first_name, @"first",
+                            fbUser.last_name, @"last",
+                            fbUser.id, @"fbid",
+                            nil];
+    
+    NSLog(@"About to call: %@ with params: %@\n", path, params);
+    
+    [self.httpClient postPath:path parameters:params
+        success:^(AFHTTPRequestOperation* operation, id json) {
+            NSLog(@"Successfully created user");
+            NSString *user = [[json objectForKey:@"user"] valueForKey:@"id"];
+            [self handleLoginSuccessful:user];
+        }
+        failure:^(AFHTTPRequestOperation* operation, NSError* error) {
+            [self handleLoginFailed:[NSString stringWithFormat:@"Unable to create user: %@", error.localizedDescription]];
+        }];
+
+}
+
 
 @end

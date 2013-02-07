@@ -1,6 +1,7 @@
 #import "AFNetworking.h"
 #import "CoreLocation/CoreLocation.h"
 #import "NearbyTableViewController.h"
+#import "AppDelegate.h"
 
 #define BASE_URL @"http://api.discoverambient.com/"
 
@@ -55,11 +56,11 @@
     NSLog(@"About to retrieve nearby users from: %@\n", url);
     
     AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
-        success:^(NSURLRequest* request, NSHTTPURLResponse* response, id JSON) {
-            self.nearbyResults = [JSON objectForKey:@"nearby"];
+        success:^(NSURLRequest* request, NSHTTPURLResponse* response, id json) {
+            self.nearbyResults = [json objectForKey:@"nearby"];
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:false];
         }
-        failure:^(NSURLRequest* request, NSHTTPURLResponse* response, NSError* error, id JSON) {
+        failure:^(NSURLRequest* request, NSHTTPURLResponse* response, NSError* error, id json) {
             NSLog(@"Unable to retrieve nearby users: %@", error.localizedDescription);
         }];
     
@@ -67,10 +68,19 @@
 }
 
 - (void) checkin:(CLLocationCoordinate2D) location {
-    NSURL* url = [self urlFor:@"checkins":location];
-    NSLog(@"About to check in to: %@\n", url);
+    // FIXME hack
+    AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
     
-    [self.httpClient postPath:[url relativeString] parameters:nil success:^(AFHTTPRequestOperation* operation, id responseObject) {}
+    NSString *path = @"checkins";
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            appDelegate.user, @"user_id",
+                            //[NSString stringWithFormat:@"%+.6f,%+.6f", location.latitude, location.longitude], @"location",
+                            @"37.785834,-122.406417", @"location",
+                            nil];
+    
+    NSLog(@"About to call: %@ with params: %@\n", path, params);
+
+    [self.httpClient postPath:path parameters:params success:^(AFHTTPRequestOperation* operation, id responseObject) {}
     failure:^(AFHTTPRequestOperation* operation, NSError* error) {
         NSLog(@"Unable to check in: %@", error.localizedDescription);
     }];
@@ -91,7 +101,9 @@
     UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"Nearby Cell"];
     
     NSDictionary* item = [self.nearbyResults objectAtIndex:indexPath.row];
-    cell.textLabel.text = [[item objectForKey:@"user"] valueForKey:@"name"];
+    NSString *first = [[item objectForKey:@"user"] valueForKey:@"first"];
+    NSString *last = [[item objectForKey:@"user"] valueForKey:@"last"];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", first, last];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@m away", [item objectForKey:@"distance"]];
     return cell;
 }
