@@ -74,8 +74,7 @@
     NSString *path = @"checkins";
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                             appDelegate.user, @"user_id",
-                            //[NSString stringWithFormat:@"%+.6f,%+.6f", location.latitude, location.longitude], @"location",
-                            @"37.785834,-122.406417", @"location",
+                            [NSString stringWithFormat:@"%+.6f,%+.6f", location.latitude, location.longitude], @"location",
                             nil];
     
     NSLog(@"About to call: %@ with params: %@\n", path, params);
