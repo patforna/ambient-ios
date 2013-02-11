@@ -102,7 +102,7 @@
 
 - (void) segueTo:(NSString *)segueId {
     UINavigationController *navigationController = (UINavigationController*)self.window.rootViewController;
-    [navigationController.topViewController performSegueWithIdentifier:segueId sender:self];
+    [navigationController.topViewController performSegueWithIdentifier:segueId sender:nil];
 }
 
 
