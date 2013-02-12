@@ -44,13 +44,13 @@
 }
 
 - (IBAction)logout:(id)sender {
-    [_fbLoginService logout];
+    [self.fbLoginService logout];
     [self.navigationController popToRootViewControllerAnimated:true];
 }
 
 - (void) viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.hidesBackButton = YES;
+    self.navigationItem.hidesBackButton = true;
 
     [self.locationManager startUpdatingLocation];
 }
