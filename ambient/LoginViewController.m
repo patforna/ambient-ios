@@ -19,10 +19,6 @@
     [self.fbLoginService login];
 }
 
-- (IBAction)performLogout:(id)sender {
-    [self.fbLoginService logout];
-}
-
 # pragma mark LoginProtocol
 - (void)loginSuccessful {
     NSLog(@"Login successful.");
