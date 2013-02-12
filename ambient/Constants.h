@@ -16,3 +16,7 @@
 // === SEGUE IDENTIFIERS
 #define NEARBY_SEGUE @"NearbySegue"
 #define LOGIN_SEGUE @"LoginSegue"
+
+// === VARIA
+#define REVERSE_DOMAIN @"com.discoverambient"
+#define EMPTY_STRING @""

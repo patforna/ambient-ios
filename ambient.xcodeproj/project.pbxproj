@@ -29,6 +29,7 @@
 		C4AC239593DD4058FAB34BA7 /* Constants.h in Resources */ = {isa = PBXBuildFile; fileRef = C4AC24D5308376184A3B0F61 /* Constants.h */; };
 		C4AC2B5EE50087BBB4F29B61 /* FBLoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AC2A51112ADEF1B7DB1501 /* FBLoginService.m */; };
 		C4AC2DBFCCE245446165FE5E /* UserService.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AC2771EAA53666A241859D /* UserService.m */; };
+		C4AC2FCF613906B5F73D7D7C /* NSError+NSErrorExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AC2677E78CAE36D9A7B7CD /* NSError+NSErrorExtensions.m */; };
 		D0CFD9E791E8450CAE0F1BA8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B29B421EA5084931B85AF145 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -71,9 +72,11 @@
 		4FE4AF2B16A95080006E2915 /* ambientTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ambientTests.h; sourceTree = "<group>"; };
 		4FE4AF2C16A95080006E2915 /* ambientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ambientTests.m; sourceTree = "<group>"; };
 		B29B421EA5084931B85AF145 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C4AC20EC5F5456FFC644E2C0 /* NSError+NSErrorExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+NSErrorExtensions.h"; sourceTree = "<group>"; };
 		C4AC22B20F48F9A0EEB660AE /* LoadUserProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadUserProtocol.h; sourceTree = "<group>"; };
 		C4AC23233C6C1A7552B74B7B /* FBLoginService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLoginService.h; sourceTree = "<group>"; };
 		C4AC24D5308376184A3B0F61 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		C4AC2677E78CAE36D9A7B7CD /* NSError+NSErrorExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+NSErrorExtensions.m"; sourceTree = "<group>"; };
 		C4AC2771EAA53666A241859D /* UserService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserService.m; sourceTree = "<group>"; };
 		C4AC288B837D0196541AC934 /* LoginProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginProtocol.h; sourceTree = "<group>"; };
 		C4AC2A51112ADEF1B7DB1501 /* FBLoginService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLoginService.m; sourceTree = "<group>"; };
@@ -158,6 +161,8 @@
 				C4AC288B837D0196541AC934 /* LoginProtocol.h */,
 				C4AC22B20F48F9A0EEB660AE /* LoadUserProtocol.h */,
 				C4AC24D5308376184A3B0F61 /* Constants.h */,
+				C4AC20EC5F5456FFC644E2C0 /* NSError+NSErrorExtensions.h */,
+				C4AC2677E78CAE36D9A7B7CD /* NSError+NSErrorExtensions.m */,
 			);
 			path = ambient;
 			sourceTree = "<group>";
@@ -330,6 +335,7 @@
 				4FC416E716C90673000E54EE /* BootstrapViewController.m in Sources */,
 				C4AC2B5EE50087BBB4F29B61 /* FBLoginService.m in Sources */,
 				C4AC2DBFCCE245446165FE5E /* UserService.m in Sources */,
+				C4AC2FCF613906B5F73D7D7C /* NSError+NSErrorExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

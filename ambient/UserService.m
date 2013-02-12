@@ -5,6 +5,7 @@
 #import "FBRequest.h"
 #import "FBSession.h"
 #import "Constants.h"
+#import "NSError+NSErrorExtensions.h"
 
 @interface UserService ()
 @property(strong, nonatomic) AFHTTPClient *httpClient;
@@ -29,7 +30,7 @@
 
 - (void)loadFBUserDetails {
     if (!FBSession.activeSession.isOpen) {
-        [self handleFailure:[self error:@"No active open session =("]];
+        [self handleFailure:[NSError error:@"No active open session =("]];
         return;
     }
 
@@ -50,8 +51,8 @@
 
     [self.httpClient getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id json) {
         [self handleUserLoaded:[self extractUserFrom:json]];
-    }                failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if (true) // TODO only if 404
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if ([operation.response statusCode] == NOT_FOUND)
             [self handleUserNotFound:fbUser];
         else
             [self handleFailure:error];
@@ -64,7 +65,7 @@
 
     [self.httpClient postPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id json) {
         [self handleUserCreated:[self extractUserFrom:json]];
-    }                 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self handleFailure:error];
     }];
 }
@@ -100,14 +101,5 @@
 - (id)extractUserFrom:(id)json {
     return [[json objectForKey:USER] valueForKey:ID];
 }
-
-- (NSError *)error:(NSString *)message {
-    NSString *domain = @"com.discoverambient";
-    NSString *desc = NSLocalizedString(message, @"");
-    NSDictionary *userInfo = @{NSLocalizedDescriptionKey : desc};
-
-    return [NSError errorWithDomain:domain code:nil userInfo:userInfo];
-}
-
 
 @end

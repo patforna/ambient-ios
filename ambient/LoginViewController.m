@@ -31,7 +31,7 @@
 
 - (void)loginFailed:(NSError *)error {
     NSLog(@"Login failed. Error: %@", error);
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Oops..." message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Oops..." message:error.localizedDescription delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
     [alertView show];
 
 }

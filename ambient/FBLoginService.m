@@ -1,6 +1,7 @@
 #import "FBLoginService.h"
 #import "UserService.h"
 #import "FBSession.h"
+#import "NSError+NSErrorExtensions.h"
 
 @interface FBLoginService ()
 @property(nonatomic, strong) UserService *userService;
@@ -60,7 +61,7 @@
 
 - (void)handleSessionLoginFailed {
     NSLog(@"FB Session Login failed");
-    [self handleLoginFailed:nil]; // FIXME use nserror
+    [self handleLoginFailed:[NSError error:@"Facebook Login failed."]];
 }
 
 - (void)handleSessionError:(NSError *)error {

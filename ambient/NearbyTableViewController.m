@@ -53,7 +53,7 @@
     
     NSURL* url = [self urlFor:NEARBY_SEARCH:location];
     NSURLRequest* request = [NSURLRequest requestWithURL:url];
-    NSLog(@"About to retrieve nearby users from: %@\n", url);
+    NSLog(@"About to retrieve nearby users error: %@\n", url);
     
     AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
         success:^(NSURLRequest* request, NSHTTPURLResponse* response, id json) {
