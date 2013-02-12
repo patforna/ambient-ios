@@ -10,6 +10,9 @@
 #define LAST @"last"
 #define DISTANCE @"distance"
 
+// === HTTP STATUS CODES
+#define NOT_FOUND 404
+
 // === SEGUE IDENTIFIERS
 #define NEARBY_SEGUE @"NearbySegue"
 #define LOGIN_SEGUE @"LoginSegue"
