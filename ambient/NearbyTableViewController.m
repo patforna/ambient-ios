@@ -2,19 +2,16 @@
 #import "CoreLocation/CoreLocation.h"
 #import "NearbyTableViewController.h"
 #import "Constants.h"
+#import "FBLoginService.h"
 
 @interface NearbyTableViewController()
 @property (strong, nonatomic) CLLocationManager* locationManager;
 @property (strong, nonatomic) AFHTTPClient* httpClient;
 @property (strong, nonatomic) NSArray * nearbyResults;
+@property (strong, nonatomic) FBLoginService *fbLoginService;
 @end
 
 @implementation NearbyTableViewController
-
-- (void) setNearbyResults:(NSArray*) nearbyResults {
-    _nearbyResults = nearbyResults;
-    [self.tableView reloadData];
-}
 
 - (CLLocationManager*) locationManager {
     if (_locationManager == nil) {
@@ -32,8 +29,23 @@
     if (_httpClient == nil) {
         _httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:BASE_URL]];
     }
-    
+
     return _httpClient;
+}
+
+- (FBLoginService *)fbLoginService {
+    if (_fbLoginService == nil) _fbLoginService = [[FBLoginService alloc] init];
+    return _fbLoginService;
+}
+
+- (void) setNearbyResults:(NSArray*) nearbyResults {
+    _nearbyResults = nearbyResults;
+    [self.tableView reloadData];
+}
+
+- (IBAction)logout:(id)sender {
+    [_fbLoginService logout];
+    [self.navigationController popToRootViewControllerAnimated:true];
 }
 
 - (void) viewDidLoad {

@@ -113,6 +113,11 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Nearby" id="ib1-jp-PTO">
                         <barButtonItem key="backBarButtonItem" title="NO" id="VXh-AT-zDu"/>
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="e6b-MF-wC8">
+                            <connections>
+                                <action selector="logout:" destination="GKi-vT-iq3" id="EnQ-vT-NXh"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q4V-ij-zX4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -145,16 +150,15 @@
         </class>
         <class className="LoginViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="performLogin:"/>
-                <relationship kind="action" name="performLogout:"/>
-            </relationships>
         </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
         </class>
         <class className="NearbyTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NearbyTableViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="logout:"/>
+            </relationships>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
