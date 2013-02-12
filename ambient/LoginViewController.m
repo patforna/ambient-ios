@@ -24,16 +24,15 @@
 }
 
 # pragma mark LoginProtocol
-- (void)loginSuccessful:(NSString *)user {
-    NSLog(@"Login successful. User: %@", user);
-    [self.delegate loginSuccessful:user];
+- (void)loginSuccessful {
+    NSLog(@"Login successful.");
+    [self.delegate loginSuccessful];
 }
 
 - (void)loginFailed:(NSError *)error {
     NSLog(@"Login failed. Error: %@", error);
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Oops..." message:error.localizedDescription delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
     [alertView show];
-
 }
 
 @end

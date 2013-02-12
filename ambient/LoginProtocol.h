@@ -1,7 +1,7 @@
 @protocol LoginProtocol <NSObject>
 
 @optional
-- (void)loginSuccessful:(NSString *)user;
+- (void)loginSuccessful;
 
 @optional
 - (void)loginFailed:(NSError *)error;

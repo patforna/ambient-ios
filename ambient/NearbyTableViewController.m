@@ -80,7 +80,7 @@
 }
 
 - (void) checkin:(CLLocationCoordinate2D) location {
-    NSString *path = [NSString stringWithFormat:@"/checkins?user_id=%@&location=%+.6f,%+.6f", self.user, location.latitude, location.longitude];
+    NSString *path = [NSString stringWithFormat:@"/checkins?user_id=%@&location=%+.6f,%+.6f", [FBLoginService getLoggedInUser], location.latitude, location.longitude];
     NSLog(@"About to call: %@\n", path);
 
     [self.httpClient postPath:path parameters:nil success:^(AFHTTPRequestOperation* operation, id responseObject) {}

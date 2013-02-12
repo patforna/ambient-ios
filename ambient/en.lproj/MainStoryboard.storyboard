@@ -68,7 +68,7 @@
                     <navigationItem key="navigationItem" id="MaQ-e1-WWa"/>
                     <connections>
                         <segue destination="GKi-vT-iq3" kind="push" identifier="NearbySegue" id="urs-iq-aHW"/>
-                        <segue destination="dEK-V5-QNY" kind="modal" identifier="LoginSegue" id="dth-gf-rEd"/>
+                        <segue destination="dEK-V5-QNY" kind="modal" identifier="LoginSegue" animates="NO" id="dth-gf-rEd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pGA-xi-Aba" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -150,6 +150,10 @@
         </class>
         <class className="LoginViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="performLogin:"/>
+                <relationship kind="action" name="performLogout:"/>
+            </relationships>
         </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>

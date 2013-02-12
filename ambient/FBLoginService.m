@@ -2,6 +2,7 @@
 #import "UserService.h"
 #import "FBSession.h"
 #import "NSError+NSErrorExtensions.h"
+#import "AppDelegate.h"
 
 @interface FBLoginService ()
 @property(nonatomic, strong) UserService *userService;
@@ -18,8 +19,13 @@
 }
 
 + (BOOL)isLoggedIn {
-    return FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded;
+    return [FBLoginService getLoggedInUser] != nil;
 }
+
++ (NSString *)getLoggedInUser {
+    return ((AppDelegate *) [[UIApplication sharedApplication] delegate]).user;
+}
+
 
 - (void)login {
     [FBSession openActiveSessionWithReadPermissions:nil allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
@@ -28,6 +34,7 @@
 }
 
 - (void)logout {
+    ((AppDelegate *) [[UIApplication sharedApplication] delegate]).user = nil;
     [FBSession.activeSession closeAndClearTokenInformation];
 }
 
@@ -61,30 +68,31 @@
 
 - (void)handleSessionLoginFailed {
     NSLog(@"FB Session Login failed");
-    [self handleLoginFailed:[NSError error:@"Facebook Login failed."]];
+    [self fireLoginFailed:[NSError error:@"Facebook Login failed."]];
 }
 
 - (void)handleSessionError:(NSError *)error {
     NSLog(@"FB Session state changed error: %@", error);
-    [self handleLoginFailed:error];
+    [self fireLoginFailed:error];
 }
 
-- (void)handleLoginSuccessful:(NSString *)user {
-    [self.delegate loginSuccessful:user];
+- (void)fireLoginSuccessful {
+    [self.delegate loginSuccessful];
 }
 
-- (void)handleLoginFailed:(NSError *)error {
+- (void)fireLoginFailed:(NSError *)error {
     [self logout];
     [self.delegate loginFailed:error];
 }
 
 # pragma mark LoadUserProtocol
 - (void)userLoaded:(NSString *)user {
-    [self handleLoginSuccessful:user];
+    ((AppDelegate *) [[UIApplication sharedApplication] delegate]).user = user;
+    [self fireLoginSuccessful];
 }
 
 - (void)failedToLoadUser:(NSError *)error {
-    [self handleLoginFailed:error];
+    [self fireLoginFailed:error];
 }
 
 @end
