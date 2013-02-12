@@ -1,20 +1,39 @@
 #import "LoginViewController.h"
-#import "AppDelegate.h"
-#import <FacebookSDK/FacebookSDK.h>
+#import "FBLoginService.h"
+
+@interface LoginViewController ()
+@property(strong, nonatomic) FBLoginService *fbLoginService;
+@end
 
 @implementation LoginViewController
 
-- (IBAction) performLogin:(id)sender {
-    AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
-    [appDelegate loginUsingFacebook];
+- (FBLoginService *)fbLoginService {
+    if (_fbLoginService == nil) {
+        _fbLoginService = [[FBLoginService alloc] init];
+        _fbLoginService.delegate = self;
+    }
+    return _fbLoginService;
+}
+
+- (IBAction)performLogin:(id)sender {
+    [self.fbLoginService login];
 }
 
 - (IBAction)performLogout:(id)sender {
-    [FBSession.activeSession closeAndClearTokenInformation];
+    [self.fbLoginService logout];
 }
 
-- (void) loginFailed { // FIXME currently unused
-    NSLog(@"Login failed.");
+# pragma mark LoginProtocol
+- (void)loginSuccessful:(NSString *)user {
+    NSLog(@"Login successful. User: %@", user);
+    [self.delegate loginSuccessful:user];
+}
+
+- (void)loginFailed:(NSError *)error {
+    NSLog(@"Login failed. Error: %@", error);
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Oops..." message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alertView show];
+
 }
 
 @end

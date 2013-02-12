@@ -1,5 +1,7 @@
 #import <UIKit/UIKit.h>
+#import "LoadUserProtocol.h"
+#import "LoginProtocol.h"
 
-@interface LoginViewController : UIViewController
-- (void)loginFailed; // FIXME currently unused
+@interface LoginViewController : UIViewController <LoginProtocol>
+@property(weak) id <LoginProtocol> delegate;
 @end

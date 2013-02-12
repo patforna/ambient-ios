@@ -1,13 +1,12 @@
 #import "AFNetworking.h"
 #import "CoreLocation/CoreLocation.h"
 #import "NearbyTableViewController.h"
-#import "AppDelegate.h"
-
-#define BASE_URL @"http://api.discoverambient.com/"
+#import "Constants.h"
 
 @interface NearbyTableViewController()
 @property (strong, nonatomic) CLLocationManager* locationManager;
 @property (strong, nonatomic) AFHTTPClient* httpClient;
+@property (strong, nonatomic) NSArray * nearbyResults;
 @end
 
 @implementation NearbyTableViewController
@@ -21,7 +20,7 @@
     if (_locationManager == nil) {
         _locationManager = [[CLLocationManager alloc] init];
         _locationManager.delegate = self;
-        _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        _locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
         _locationManager.distanceFilter = 10; //movement threshold for new events
         _locationManager.activityType = CLActivityTypeFitness;
         _locationManager.pausesLocationUpdatesAutomatically = true;
@@ -31,8 +30,7 @@
 
 - (AFHTTPClient*) httpClient {
     if (_httpClient == nil) {
-        NSURL *baseURL = [NSURL URLWithString:BASE_URL];
-        _httpClient = [[AFHTTPClient alloc] initWithBaseURL:baseURL];
+        _httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:BASE_URL]];
     }
     
     return _httpClient;
@@ -40,6 +38,8 @@
 
 - (void) viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.hidesBackButton = YES;
+
     [self.locationManager startUpdatingLocation];
 }
 
@@ -51,13 +51,13 @@
 - (void) retrieveNearbyUsers:(CLLocationCoordinate2D) location {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:true];
     
-    NSURL* url = [self urlFor:@"search/nearby":location];
+    NSURL* url = [self urlFor:NEARBY_SEARCH:location];
     NSURLRequest* request = [NSURLRequest requestWithURL:url];
     NSLog(@"About to retrieve nearby users from: %@\n", url);
     
     AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
         success:^(NSURLRequest* request, NSHTTPURLResponse* response, id json) {
-            self.nearbyResults = [json objectForKey:@"nearby"];
+            self.nearbyResults = [json objectForKey:NEARBY];
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:false];
         }
         failure:^(NSURLRequest* request, NSHTTPURLResponse* response, NSError* error, id json) {
@@ -68,10 +68,7 @@
 }
 
 - (void) checkin:(CLLocationCoordinate2D) location {
-    // FIXME hack
-    AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
-    
-    NSString *path = [NSString stringWithFormat:@"checkins?user_id=%@&location=%+.6f,%+.6f", appDelegate.user, location.latitude, location.longitude];
+    NSString *path = [NSString stringWithFormat:@"/checkins?user_id=%@&location=%+.6f,%+.6f", self.user, location.latitude, location.longitude];
     NSLog(@"About to call: %@\n", path);
 
     [self.httpClient postPath:path parameters:nil success:^(AFHTTPRequestOperation* operation, id responseObject) {}
@@ -95,10 +92,10 @@
     UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"Nearby Cell"];
     
     NSDictionary* item = [self.nearbyResults objectAtIndex:indexPath.row];
-    NSString *first = [[item objectForKey:@"user"] valueForKey:@"first"];
-    NSString *last = [[item objectForKey:@"user"] valueForKey:@"last"];
+    NSString *first = [[item objectForKey:USER] valueForKey:FIRST];
+    NSString *last = [[item objectForKey:USER] valueForKey:LAST];
     cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", first, last];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@m away", [item objectForKey:@"distance"]];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@m away", [item objectForKey:DISTANCE]];
     return cell;
 }
 
