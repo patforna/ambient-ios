@@ -4,13 +4,15 @@
 #import "Constants.h"
 #import "FBLoginService.h"
 #import "AFHTTPClient+AFHTTPClientExtensions.h"
+#import "Location.h"
+#import "NSString+Extensions.h"
 
 @interface NearbyTableViewController ()
 @property(strong, nonatomic) CLLocationManager *locationManager;
 @property(strong, nonatomic) AFHTTPClient *httpClient;
 @property(strong, nonatomic) FBLoginService *fbLoginService;
 
-@property(nonatomic) CLLocationCoordinate2D location;
+@property(strong, nonatomic) Location *location;
 @property(strong, nonatomic) NSArray *nearbyResults;
 @end
 
@@ -62,8 +64,8 @@
 
 - (void)retrieveNearbyUsers {
     [self.refreshControl beginRefreshing]; // manually show spinner, because it might be the first time we load
-    NSString *path = [NSString stringWithFormat:@"%@?%@=%+.6f,%+.6f", NEARBY_SEARCH, LOCATION, self.location.latitude, self.location.longitude];
 
+    NSString *path = [NSString urlPath:NEARBY_SEARCH params:@{ LOCATION : self.location }];
     [self.httpClient get:path success:^(id json) {
         self.nearbyResults = [json objectForKey:NEARBY];
     } failure:nil finally:^{
@@ -72,7 +74,7 @@
 }
 
 - (void)checkin {
-    NSString *path = [NSString stringWithFormat:@"%@?%@=%@&%@=%+.6f,%+.6f", CHECKINS, USER_ID, [FBLoginService getLoggedInUser], LOCATION, self.location.latitude, self.location.longitude];
+    NSString *path = [NSString urlPath:CHECKINS params:@{ USER_ID : [FBLoginService getLoggedInUser], LOCATION : self.location }];
     [self.httpClient post:path success:nil failure:nil];
 }
 
@@ -95,7 +97,7 @@
 
 #pragma mark - CLLocationManagerDelegate
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    self.location = manager.location.coordinate;
+    self.location = [Location from:manager.location.coordinate];
     [self handleLocationUpdate];
 }
 

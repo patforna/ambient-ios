@@ -7,6 +7,7 @@
 #import "Constants.h"
 #import "NSError+NSErrorExtensions.h"
 #import "AFHTTPClient+AFHTTPClientExtensions.h"
+#import "NSString+Extensions.h"
 
 @interface UserService ()
 @property(strong, nonatomic) AFHTTPClient *httpClient;
@@ -36,8 +37,7 @@
 }
 
 - (void)loadUserFrom:(NSDictionary <FBGraphUser> *)fbUser {
-    NSString *path = [NSString stringWithFormat:@"%@?%@=%@", USERS_SEARCH, FBID, fbUser.id];
-
+    NSString *path = [NSString urlPath:USERS_SEARCH params:@{FBID : fbUser.id}];
     [self.httpClient get:path success:^(id json) {
         [self handleUserLoaded:[self extractUserFrom:json]];
     } failure:^(NSInteger *status, NSError *error) {
@@ -46,8 +46,7 @@
 }
 
 - (void)createUserFrom:(NSDictionary <FBGraphUser> *)fbUser {
-    NSString *path = [NSString stringWithFormat:@"%@?%@=%@&%@=%@&%@=%@", USERS, FIRST, fbUser.first_name, LAST, fbUser.last_name, FBID, fbUser.id];
-
+    NSString *path = [NSString urlPath:USERS params:@{FIRST : fbUser.first_name, LAST : fbUser.last_name, FBID : fbUser.id}];
     [self.httpClient post:path success:^(id json) {
         [self handleUserCreated:[self extractUserFrom:json]];
     } failure:^(NSInteger *status, NSError *error) {
