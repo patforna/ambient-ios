@@ -7,8 +7,10 @@
 @interface NearbyTableViewController()
 @property (strong, nonatomic) CLLocationManager* locationManager;
 @property (strong, nonatomic) AFHTTPClient* httpClient;
-@property (strong, nonatomic) NSArray * nearbyResults;
 @property (strong, nonatomic) FBLoginService *fbLoginService;
+
+@property (nonatomic) CLLocationCoordinate2D location;
+@property (strong, nonatomic) NSArray * nearbyResults;
 @end
 
 @implementation NearbyTableViewController
@@ -51,36 +53,40 @@
 - (void) viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.hidesBackButton = true;
-
     [self.locationManager startUpdatingLocation];
+    [self.refreshControl addTarget:self action:@selector(retrieveNearbyUsers) forControlEvents:UIControlEventValueChanged];
 }
 
-- (void) handleLocationUpdate:(CLLocationCoordinate2D) location {
-    if (self.nearbyResults == nil) [self retrieveNearbyUsers:location];
-    [self checkin:location];
+- (void) handleLocationUpdate {
+    if (self.nearbyResults == nil) [self retrieveNearbyUsers];
+    [self checkin];
 }
 
-- (void) retrieveNearbyUsers:(CLLocationCoordinate2D) location {
+- (void) retrieveNearbyUsers {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:true];
-    
-    NSURL* url = [self urlFor:NEARBY_SEARCH:location];
+    [self.refreshControl beginRefreshing]; // manually show spinner, because it might be the first time we load
+
+    NSURL* url = [self urlFor:NEARBY_SEARCH:self.location];
     NSURLRequest* request = [NSURLRequest requestWithURL:url];
     NSLog(@"About to retrieve nearby users error: %@\n", url);
     
     AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
         success:^(NSURLRequest* request, NSHTTPURLResponse* response, id json) {
             self.nearbyResults = [json objectForKey:NEARBY];
-            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:false];
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:false];  // FIXME DRY
+            [self.refreshControl endRefreshing];   // FIXME DRY
         }
         failure:^(NSURLRequest* request, NSHTTPURLResponse* response, NSError* error, id json) {
             NSLog(@"Unable to retrieve nearby users: %@", error.localizedDescription);
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:false];  // FIXME DRY
+            [self.refreshControl endRefreshing];   // FIXME DRY
         }];
     
     [operation start];
 }
 
-- (void) checkin:(CLLocationCoordinate2D) location {
-    NSString *path = [NSString stringWithFormat:@"/checkins?user_id=%@&location=%+.6f,%+.6f", [FBLoginService getLoggedInUser], location.latitude, location.longitude];
+- (void) checkin {
+    NSString *path = [NSString stringWithFormat:@"/checkins?user_id=%@&location=%+.6f,%+.6f", [FBLoginService getLoggedInUser], self.location.latitude, self.location.longitude];
     NSLog(@"About to call: %@\n", path);
 
     [self.httpClient postPath:path parameters:nil success:^(AFHTTPRequestOperation* operation, id responseObject) {}
@@ -113,7 +119,8 @@
 
 #pragma mark - CLLocationManagerDelegate
 - (void) locationManager:(CLLocationManager*) manager didUpdateLocations:(NSArray*) locations {
-    [self handleLocationUpdate:manager.location.coordinate];
+    self.location = manager.location.coordinate;
+    [self handleLocationUpdate];
 }
 
 - (void) locationManager:(CLLocationManager*) manager didFailWithError:(NSError*) error {
