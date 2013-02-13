@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4F14EEE716B0007100A25F35 /* NearbyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F14EEE616B0007100A25F35 /* NearbyTableViewController.m */; };
+		4F7E95E516CBAF8400C12A57 /* fb-login-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F7E95E316CBAF8400C12A57 /* fb-login-button.png */; };
+		4F7E95E616CBAF8400C12A57 /* fb-login-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F7E95E416CBAF8400C12A57 /* fb-login-button@2x.png */; };
 		4F98554316B6984D00C35905 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F98554216B6984D00C35905 /* CoreLocation.framework */; };
 		4FC416E716C90673000E54EE /* BootstrapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FC416E616C90673000E54EE /* BootstrapViewController.m */; };
 		4FD2380B16BABEBA00803C0F /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD2380A16BABEBA00803C0F /* LoginViewController.m */; };
@@ -46,6 +48,8 @@
 /* Begin PBXFileReference section */
 		4F14EEE516B0007100A25F35 /* NearbyTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearbyTableViewController.h; sourceTree = "<group>"; };
 		4F14EEE616B0007100A25F35 /* NearbyTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearbyTableViewController.m; sourceTree = "<group>"; };
+		4F7E95E316CBAF8400C12A57 /* fb-login-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fb-login-button.png"; sourceTree = "<group>"; };
+		4F7E95E416CBAF8400C12A57 /* fb-login-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fb-login-button@2x.png"; sourceTree = "<group>"; };
 		4F98554216B6984D00C35905 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4FC416E516C90673000E54EE /* BootstrapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BootstrapViewController.h; sourceTree = "<group>"; };
 		4FC416E616C90673000E54EE /* BootstrapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BootstrapViewController.m; sourceTree = "<group>"; };
@@ -110,9 +114,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F7E95DB16CBA79A00C12A57 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				4F7E95DC16CBA79A00C12A57 /* images */,
+			);
+			path = resources;
+			sourceTree = "<group>";
+		};
+		4F7E95DC16CBA79A00C12A57 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				4F7E95E316CBAF8400C12A57 /* fb-login-button.png */,
+				4F7E95E416CBAF8400C12A57 /* fb-login-button@2x.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
 		4FE4AEEC16A95080006E2915 = {
 			isa = PBXGroup;
 			children = (
+				4F7E95DB16CBA79A00C12A57 /* resources */,
 				4F98554216B6984D00C35905 /* CoreLocation.framework */,
 				4FE4AF0116A95080006E2915 /* ambient */,
 				4FE4AF2516A95080006E2915 /* ambientTests */,
@@ -280,6 +302,8 @@
 				4FE4AF1216A95080006E2915 /* Default-568h@2x.png in Resources */,
 				4FE4AF1516A95080006E2915 /* MainStoryboard.storyboard in Resources */,
 				C4AC239593DD4058FAB34BA7 /* Constants.h in Resources */,
+				4F7E95E516CBAF8400C12A57 /* fb-login-button.png in Resources */,
+				4F7E95E616CBAF8400C12A57 /* fb-login-button@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
