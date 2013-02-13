@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
 
-@interface NSError (NSErrorExtensions)
+@interface NSError (Extensions)
 +(NSError *)error:(NSString *)message;
 @end

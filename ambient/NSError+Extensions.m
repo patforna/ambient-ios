@@ -1,7 +1,7 @@
-#import "NSError+NSErrorExtensions.h"
+#import "NSError+Extensions.h"
 #import "Constants.h"
 
-@implementation NSError (NSErrorExtensions)
+@implementation NSError (Extensions)
 
 + (NSError *)error:(NSString *)message {
     NSString *domain = REVERSE_DOMAIN;

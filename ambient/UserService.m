@@ -5,7 +5,7 @@
 #import "FBRequest.h"
 #import "FBSession.h"
 #import "Constants.h"
-#import "NSError+NSErrorExtensions.h"
+#import "NSError+Extensions.h"
 #import "AFHTTPClient+AFHTTPClientExtensions.h"
 #import "NSString+Extensions.h"
 

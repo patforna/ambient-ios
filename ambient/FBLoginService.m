@@ -1,7 +1,7 @@
 #import "FBLoginService.h"
 #import "UserService.h"
 #import "FBSession.h"
-#import "NSError+NSErrorExtensions.h"
+#import "NSError+Extensions.h"
 #import "AppDelegate.h"
 
 @interface FBLoginService ()
