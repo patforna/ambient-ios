@@ -6,6 +6,7 @@
 #import "FBSession.h"
 #import "Constants.h"
 #import "NSError+NSErrorExtensions.h"
+#import "AFHTTPClient+AFHTTPClientExtensions.h"
 
 @interface UserService ()
 @property(strong, nonatomic) AFHTTPClient *httpClient;
@@ -14,13 +15,7 @@
 @implementation UserService
 
 - (AFHTTPClient *)httpClient {
-    if (_httpClient == nil) {
-        NSURL *baseURL = [NSURL URLWithString:BASE_URL];
-        _httpClient = [[AFHTTPClient alloc] initWithBaseURL:baseURL];
-        [_httpClient registerHTTPOperationClass:[AFJSONRequestOperation class]];
-        [_httpClient setDefaultHeader:@"Accept" value:@"application/json"];
-    }
-
+    if (_httpClient == nil) _httpClient = [AFHTTPClient forAmbient];
     return _httpClient;
 }
 
@@ -36,36 +31,26 @@
 
     NSLog(@"About to fetch user details...");
     [[FBRequest requestForMe] startWithCompletionHandler:^(FBRequestConnection *connection, NSDictionary <FBGraphUser> *fbUser, NSError *error) {
-        if (error) {
-            [self handleFailure:error];
-            return;
-        }
-
-        [self handleFBUserDetailsLoaded:fbUser];
+        if (error) [self handleFailure:error]; else [self handleFBUserDetailsLoaded:fbUser];
     }];
 }
 
 - (void)loadUserFrom:(NSDictionary <FBGraphUser> *)fbUser {
-    NSString *path = [NSString stringWithFormat:@"/users/search?fbid=%@", fbUser.id];
-    NSLog(@"About to call: %@\n", path);
+    NSString *path = [NSString stringWithFormat:@"%@?%@=%@", USERS_SEARCH, FBID, fbUser.id];
 
-    [self.httpClient getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id json) {
+    [self.httpClient get:path success:^(id json) {
         [self handleUserLoaded:[self extractUserFrom:json]];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if ([operation.response statusCode] == NOT_FOUND)
-            [self handleUserNotFound:fbUser];
-        else
-            [self handleFailure:error];
+    } failure:^(NSInteger *status, NSError *error) {
+        if (status == NOT_FOUND) [self handleUserNotFound:fbUser]; else [self handleFailure:error];
     }];
 }
 
 - (void)createUserFrom:(NSDictionary <FBGraphUser> *)fbUser {
-    NSString *path = [NSString stringWithFormat:@"/users?first=%@&last=%@&fbid=%@", fbUser.first_name, fbUser.last_name, fbUser.id];
-    NSLog(@"About to call: %@\n", path);
+    NSString *path = [NSString stringWithFormat:@"%@?%@=%@&%@=%@&%@=%@", USERS, FIRST, fbUser.first_name, LAST, fbUser.last_name, FBID, fbUser.id];
 
-    [self.httpClient postPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id json) {
+    [self.httpClient post:path success:^(id json) {
         [self handleUserCreated:[self extractUserFrom:json]];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSInteger *status, NSError *error) {
         [self handleFailure:error];
     }];
 }
