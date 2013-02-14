@@ -8,6 +8,7 @@
 #import "NSString+Extensions.h"
 #import "ProfileViewController.h"
 #import "Nearby.h"
+#import "NSArray+Extensions.h"
 
 @interface NearbyTableViewController ()
 @property(strong, nonatomic) CLLocationManager *locationManager;
@@ -69,13 +70,8 @@
 
     NSString *path = [NSString urlPath:NEARBY_SEARCH params:@{LOCATION : self.location}];
     [self.httpClient get:path success:^(id json) {
-
-        NSArray *results = [json objectForKey:NEARBY];
-        NSMutableArray *nearbyList = [[NSMutableArray alloc] init];
-        for (id result in results) {[nearbyList addObject:[Nearby from:result]];}
-        self.nearbyList = nearbyList;
-
-    }            failure:nil finally:^{
+        self.nearbyList = [[json objectForKey:NEARBY] map:^(id x) {return [Nearby from:x];}];
+    } failure:nil finally:^{
         [self.refreshControl endRefreshing];
     }];
 }
