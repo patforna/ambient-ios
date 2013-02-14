@@ -6,7 +6,7 @@
 #import "FBSession.h"
 #import "Constants.h"
 #import "NSError+Extensions.h"
-#import "AFHTTPClient+AFHTTPClientExtensions.h"
+#import "AFHTTPClient+Extensions.h"
 #import "NSString+Extensions.h"
 
 @interface UserService ()

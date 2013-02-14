@@ -3,7 +3,7 @@
 #import "NearbyTableViewController.h"
 #import "Constants.h"
 #import "FBLoginService.h"
-#import "AFHTTPClient+AFHTTPClientExtensions.h"
+#import "AFHTTPClient+Extensions.h"
 #import "Location.h"
 #import "NSString+Extensions.h"
 

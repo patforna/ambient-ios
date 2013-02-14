@@ -33,7 +33,7 @@
 		C4AC2B5EE50087BBB4F29B61 /* FBLoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AC2A51112ADEF1B7DB1501 /* FBLoginService.m */; };
 		C4AC2CF8DCAB1AA9C3439FC3 /* NSString+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AC2934CADFF2C7F1A5D385 /* NSString+Extensions.m */; };
 		C4AC2DBFCCE245446165FE5E /* UserService.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AC2771EAA53666A241859D /* UserService.m */; };
-		C4AC2E3172CEE1032331AE03 /* AFHTTPClient+AFHTTPClientExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AC209AA3EFE2A56FB659F0 /* AFHTTPClient+AFHTTPClientExtensions.m */; };
+		C4AC2E3172CEE1032331AE03 /* AFHTTPClient+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AC209AA3EFE2A56FB659F0 /* AFHTTPClient+Extensions.m */; };
 		C4AC2FCF613906B5F73D7D7C /* NSError+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AC2677E78CAE36D9A7B7CD /* NSError+Extensions.m */; };
 		D0CFD9E791E8450CAE0F1BA8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B29B421EA5084931B85AF145 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -79,7 +79,7 @@
 		4FE4AF2B16A95080006E2915 /* ambientTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ambientTests.h; sourceTree = "<group>"; };
 		4FE4AF2C16A95080006E2915 /* ambientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ambientTests.m; sourceTree = "<group>"; };
 		B29B421EA5084931B85AF145 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		C4AC209AA3EFE2A56FB659F0 /* AFHTTPClient+AFHTTPClientExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AFHTTPClient+AFHTTPClientExtensions.m"; sourceTree = "<group>"; };
+		C4AC209AA3EFE2A56FB659F0 /* AFHTTPClient+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AFHTTPClient+Extensions.m"; sourceTree = "<group>"; };
 		C4AC20EC5F5456FFC644E2C0 /* NSError+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+Extensions.h"; sourceTree = "<group>"; };
 		C4AC22B20F48F9A0EEB660AE /* LoadUserProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadUserProtocol.h; sourceTree = "<group>"; };
 		C4AC23233C6C1A7552B74B7B /* FBLoginService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLoginService.h; sourceTree = "<group>"; };
@@ -91,7 +91,7 @@
 		C4AC288B837D0196541AC934 /* LoginProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginProtocol.h; sourceTree = "<group>"; };
 		C4AC2934CADFF2C7F1A5D385 /* NSString+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extensions.m"; sourceTree = "<group>"; };
 		C4AC2949CD2A6B578BEC6860 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
-		C4AC296053C9D82355AB42B8 /* AFHTTPClient+AFHTTPClientExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFHTTPClient+AFHTTPClientExtensions.h"; sourceTree = "<group>"; };
+		C4AC296053C9D82355AB42B8 /* AFHTTPClient+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFHTTPClient+Extensions.h"; sourceTree = "<group>"; };
 		C4AC2A51112ADEF1B7DB1501 /* FBLoginService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLoginService.m; sourceTree = "<group>"; };
 		C4AC2C8521FCE206473324D6 /* UserService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserService.h; sourceTree = "<group>"; };
 		E3A4A49BFCE9420D9CB5E8EC /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
@@ -198,6 +198,8 @@
 				C4AC259A4A15AFE38E2E3423 /* Location.m */,
 				C4AC2934CADFF2C7F1A5D385 /* NSString+Extensions.m */,
 				C4AC25D0E17C46C43D84FF9B /* NSString+Extensions.h */,
+				C4AC296053C9D82355AB42B8 /* AFHTTPClient+Extensions.h */,
+				C4AC209AA3EFE2A56FB659F0 /* AFHTTPClient+Extensions.m */,
 			);
 			path = ambient;
 			sourceTree = "<group>";
@@ -214,8 +216,6 @@
 				4FE4AF0D16A95080006E2915 /* Default.png */,
 				4FE4AF0F16A95080006E2915 /* Default@2x.png */,
 				4FE4AF1116A95080006E2915 /* Default-568h@2x.png */,
-				C4AC209AA3EFE2A56FB659F0 /* AFHTTPClient+AFHTTPClientExtensions.m */,
-				C4AC296053C9D82355AB42B8 /* AFHTTPClient+AFHTTPClientExtensions.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -375,7 +375,7 @@
 				C4AC2B5EE50087BBB4F29B61 /* FBLoginService.m in Sources */,
 				C4AC2DBFCCE245446165FE5E /* UserService.m in Sources */,
 				C4AC2FCF613906B5F73D7D7C /* NSError+Extensions.m in Sources */,
-				C4AC2E3172CEE1032331AE03 /* AFHTTPClient+AFHTTPClientExtensions.m in Sources */,
+				C4AC2E3172CEE1032331AE03 /* AFHTTPClient+Extensions.m in Sources */,
 				C4AC251E881F972A9781B466 /* Location.m in Sources */,
 				C4AC2CF8DCAB1AA9C3439FC3 /* NSString+Extensions.m in Sources */,
 			);

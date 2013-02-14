@@ -1,8 +1,8 @@
-#import "AFHTTPClient+AFHTTPClientExtensions.h"
+#import "AFHTTPClient+Extensions.h"
 #import "AFNetworking.h"
 #import "Constants.h"
 
-@implementation AFHTTPClient (AFHTTPClientExtensions)
+@implementation AFHTTPClient (Extensions)
 + (AFHTTPClient *)forAmbient {
     NSURL *baseURL = [NSURL URLWithString:BASE_URL];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:baseURL];
