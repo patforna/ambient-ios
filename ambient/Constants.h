@@ -20,8 +20,9 @@
 #define NOT_FOUND 404
 
 // === SEGUE IDENTIFIERS
-#define NEARBY_SEGUE @"NearbySegue"
 #define LOGIN_SEGUE @"LoginSegue"
+#define NEARBY_SEGUE @"NearbySegue"
+#define PROFILE_SEGUE @"ProfileSegue"
 
 // === VARIA
 #define REVERSE_DOMAIN @"com.discoverambient"

@@ -6,6 +6,7 @@
 #import "AFHTTPClient+Extensions.h"
 #import "Location.h"
 #import "NSString+Extensions.h"
+#import "ProfileViewController.h"
 
 @interface NearbyTableViewController ()
 @property(strong, nonatomic) CLLocationManager *locationManager;
@@ -78,6 +79,21 @@
     [self.httpClient post:path success:nil failure:nil];
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:PROFILE_SEGUE]) {
+        ProfileViewController *profileViewController = (ProfileViewController *) segue.destinationViewController;
+
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+
+        NSDictionary *item = [self.nearbyResults objectAtIndex:indexPath.row];
+        NSString *first = [[item objectForKey:USER] valueForKey:FIRST];
+        NSString *last = [[item objectForKey:USER] valueForKey:LAST];
+        NSString *user = [NSString stringWithFormat:@"%@ %@", first, last];
+        
+        profileViewController.user = user;
+    }
+}
+
 #pragma mark - Table view data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.nearbyResults count];
@@ -104,6 +120,7 @@
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
     NSLog(@"Unable to retrieve location: %@\n", error);
 }
+
 @end
 
 

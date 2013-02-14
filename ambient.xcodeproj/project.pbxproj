@@ -10,6 +10,7 @@
 		4F14EEE716B0007100A25F35 /* NearbyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F14EEE616B0007100A25F35 /* NearbyTableViewController.m */; };
 		4F7E95E516CBAF8400C12A57 /* fb-login-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F7E95E316CBAF8400C12A57 /* fb-login-button.png */; };
 		4F7E95E616CBAF8400C12A57 /* fb-login-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F7E95E416CBAF8400C12A57 /* fb-login-button@2x.png */; };
+		4F7E95E916CD055C00C12A57 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F7E95E816CD055C00C12A57 /* ProfileViewController.m */; };
 		4F98554316B6984D00C35905 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F98554216B6984D00C35905 /* CoreLocation.framework */; };
 		4FC416E716C90673000E54EE /* BootstrapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FC416E616C90673000E54EE /* BootstrapViewController.m */; };
 		4FD2380B16BABEBA00803C0F /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD2380A16BABEBA00803C0F /* LoginViewController.m */; };
@@ -53,6 +54,8 @@
 		4F14EEE616B0007100A25F35 /* NearbyTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearbyTableViewController.m; sourceTree = "<group>"; };
 		4F7E95E316CBAF8400C12A57 /* fb-login-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fb-login-button.png"; sourceTree = "<group>"; };
 		4F7E95E416CBAF8400C12A57 /* fb-login-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fb-login-button@2x.png"; sourceTree = "<group>"; };
+		4F7E95E716CD055C00C12A57 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		4F7E95E816CD055C00C12A57 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		4F98554216B6984D00C35905 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4FC416E516C90673000E54EE /* BootstrapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BootstrapViewController.h; sourceTree = "<group>"; };
 		4FC416E616C90673000E54EE /* BootstrapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BootstrapViewController.m; sourceTree = "<group>"; };
@@ -178,6 +181,8 @@
 			isa = PBXGroup;
 			children = (
 				4FE4AF1316A95080006E2915 /* MainStoryboard.storyboard */,
+				4F7E95E716CD055C00C12A57 /* ProfileViewController.h */,
+				4F7E95E816CD055C00C12A57 /* ProfileViewController.m */,
 				4FC416E516C90673000E54EE /* BootstrapViewController.h */,
 				4FC416E616C90673000E54EE /* BootstrapViewController.m */,
 				4FD2380916BABEBA00803C0F /* LoginViewController.h */,
@@ -378,6 +383,7 @@
 				C4AC2E3172CEE1032331AE03 /* AFHTTPClient+Extensions.m in Sources */,
 				C4AC251E881F972A9781B466 /* Location.m in Sources */,
 				C4AC2CF8DCAB1AA9C3439FC3 /* NSString+Extensions.m in Sources */,
+				4F7E95E916CD055C00C12A57 /* ProfileViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
