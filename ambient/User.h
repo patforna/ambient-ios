@@ -5,5 +5,6 @@
 @property (strong, nonatomic) NSString *id;
 @property (strong, nonatomic) NSString *first;
 @property (strong, nonatomic) NSString *last;
-@property (readonly, strong, nonatomic) NSString *name;
+@property (strong, nonatomic) NSString *picture;
+@property (readonly, weak, nonatomic) NSString *name;
 @end

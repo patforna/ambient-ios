@@ -13,6 +13,7 @@
 #define LAST @"last"
 #define FBID @"fbid"
 #define LOCATION @"location"
+#define PICTURE @"picture"
 #define USER_ID @"user_id"
 #define DISTANCE @"distance"
 

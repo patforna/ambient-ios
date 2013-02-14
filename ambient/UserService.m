@@ -10,6 +10,8 @@
 #import "NSString+Extensions.h"
 #import "User.h"
 
+static NSString *const FB_PICTURE_URL_TEMPLATE = @"%@/%@/picture?type=large";
+
 @interface UserService ()
 @property(strong, nonatomic) AFHTTPClient *httpClient;
 @end
@@ -47,12 +49,16 @@
 }
 
 - (void)createUserFrom:(NSDictionary <FBGraphUser> *)fbUser {
-    NSString *path = [NSString urlPath:USERS params:@{FIRST : fbUser.first_name, LAST : fbUser.last_name, FBID : fbUser.id}];
+    NSString *path = [NSString urlPath:USERS params:@{FIRST : fbUser.first_name, LAST : fbUser.last_name, FBID : fbUser.id, PICTURE : [self pictureUrlFor:fbUser]}];
     [self.httpClient post:path success:^(id json) {
         [self handleUserCreated:[User from:json]];
     } failure:^(NSInteger *status, NSError *error) {
         [self handleFailure:error];
     }];
+}
+
+- (NSString *)pictureUrlFor:(NSDictionary <FBGraphUser> *)fbUser {
+    return [NSString stringWithFormat:FB_PICTURE_URL_TEMPLATE, FBGraphBasePath, fbUser.id];
 }
 
 #pragma callbacks
