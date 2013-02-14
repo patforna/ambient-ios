@@ -18,7 +18,10 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:LOGIN_SEGUE]) {
-        ((LoginViewController *) segue.destinationViewController).delegate = self;
+        LoginViewController *loginViewController = (LoginViewController *) segue.destinationViewController;
+        loginViewController.delegate = self;
+        [loginViewController resetView];
+
     }
 }
 

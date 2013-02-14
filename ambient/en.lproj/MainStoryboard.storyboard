@@ -25,14 +25,21 @@
                                     <action selector="performLogin:" destination="dEK-V5-QNY" eventType="touchUpInside" id="fT1-0m-cUp"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="g32-ok-1fj"/>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="zFe-NZ-ifY" firstAttribute="centerY" secondItem="OIy-1m-gc7" secondAttribute="centerY" type="default" id="Chf-e8-b74"/>
+                            <constraint firstItem="g32-ok-1fj" firstAttribute="centerX" secondItem="zFe-NZ-ifY" secondAttribute="centerX" type="default" id="P4J-oE-KTn"/>
+                            <constraint firstItem="g32-ok-1fj" firstAttribute="centerY" secondItem="OIy-1m-gc7" secondAttribute="centerY" type="default" id="PNY-fN-Y2u"/>
                             <constraint firstItem="zFe-NZ-ifY" firstAttribute="leading" secondItem="OIy-1m-gc7" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="sTo-ca-P2J"/>
+                            <constraint firstItem="g32-ok-1fj" firstAttribute="centerY" secondItem="zFe-NZ-ifY" secondAttribute="centerY" type="default" id="scJ-Bg-h1O"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Login" id="kx6-p8-mfn"/>
+                    <connections>
+                        <outlet property="loginButton" destination="zFe-NZ-ifY" id="pC8-KV-QyC"/>
+                        <outlet property="spinner" destination="g32-ok-1fj" id="NHj-gB-hc3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7MI-Z6-nea" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -140,6 +147,8 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
             <relationships>
                 <relationship kind="action" name="performLogin:"/>
+                <relationship kind="outlet" name="loginButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="spinner" candidateClass="UIActivityIndicatorView"/>
             </relationships>
         </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
