@@ -27,9 +27,9 @@
 }
 
 # pragma mark LoginProtocol
-- (void)loginSuccessful {
+- (void)loginSuccessful:(id)sender {
     NSLog(@"Login successful.");
-    [self.delegate loginSuccessful];
+    [self.delegate loginSuccessful:self];
 }
 
 - (void)loginFailed:(NSError *)error {

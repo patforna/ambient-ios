@@ -18,7 +18,7 @@
     return _userService;
 }
 
-+ (BOOL)isLoggedIn {
++ (BOOL)isAuthenticated {
     return (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded
             || FBSession.activeSession.state == FBSessionStateOpen
             || FBSession.activeSession.state == FBSessionStateOpenTokenExtended);
@@ -81,7 +81,7 @@
 }
 
 - (void)fireLoginSuccessful {
-    [self.delegate loginSuccessful];
+    [self.delegate loginSuccessful:self];
 }
 
 - (void)fireLoginFailed:(NSError *)error {
