@@ -19,18 +19,22 @@
 }
 
 + (BOOL)isLoggedIn {
-    return [FBLoginService getLoggedInUser] != nil;
+    return (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded
+            || FBSession.activeSession.state == FBSessionStateOpen
+            || FBSession.activeSession.state == FBSessionStateOpenTokenExtended);
 }
 
 + (User *)getLoggedInUser {
     return ((AppDelegate *) [[UIApplication sharedApplication] delegate]).user;
 }
 
-
 - (void)login {
-    [FBSession openActiveSessionWithReadPermissions:nil allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
-        [self sessionStateChangedState:state error:error];
-    }];
+    if ([FBLoginService getLoggedInUser]) // skip login if we already loaded the user
+        [self fireLoginSuccessful];
+    else
+        [FBSession openActiveSessionWithReadPermissions:nil allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
+            [self sessionStateChangedState:state error:error];
+        }];
 }
 
 - (void)logout {

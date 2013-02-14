@@ -3,14 +3,26 @@
 #import "FBLoginService.h"
 #import "LoginViewController.h"
 
+@interface BootstrapViewController()
+@property(strong, nonatomic) FBLoginService *fbLoginService;
+@end
+
 @implementation BootstrapViewController
+
+- (FBLoginService *)fbLoginService {
+    if (_fbLoginService == nil) {
+        _fbLoginService = [[FBLoginService alloc] init];
+        _fbLoginService.delegate = self;
+    }
+    return _fbLoginService;
+}
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 
     if ([FBLoginService isLoggedIn]) {
         NSLog(@"Already logged in.");
-        [self performSegueWithIdentifier:NEARBY_SEGUE sender:self];
+        [self.fbLoginService login];
     } else {
         [self performSegueWithIdentifier:LOGIN_SEGUE sender:self];
     }
@@ -28,6 +40,7 @@
 # pragma mark LoginProtocol
 - (void)loginSuccessful {
     [self dismissViewControllerAnimated:false completion:nil];
+    [self performSegueWithIdentifier:NEARBY_SEGUE sender:self];
 }
 
 @end
