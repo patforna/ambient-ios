@@ -7,6 +7,7 @@
 #import "Location.h"
 #import "NSString+Extensions.h"
 #import "ProfileViewController.h"
+#import "Nearby.h"
 
 @interface NearbyTableViewController ()
 @property(strong, nonatomic) CLLocationManager *locationManager;
@@ -14,7 +15,7 @@
 @property(strong, nonatomic) FBLoginService *fbLoginService;
 
 @property(strong, nonatomic) Location *location;
-@property(strong, nonatomic) NSArray *nearbyResults;
+@property(strong, nonatomic) NSArray *nearbyList;
 @end
 
 @implementation NearbyTableViewController
@@ -41,8 +42,8 @@
     return _fbLoginService;
 }
 
-- (void)setNearbyResults:(NSArray *)nearbyResults {
-    _nearbyResults = nearbyResults;
+- (void)setNearbyList:(NSArray *)nearbyList {
+    _nearbyList = nearbyList;
     [self.tableView reloadData];
 }
 
@@ -59,55 +60,51 @@
 }
 
 - (void)handleLocationUpdate {
-    if (self.nearbyResults == nil) [self retrieveNearbyUsers];
+    if (self.nearbyList == nil) [self retrieveNearbyUsers];
     [self checkin];
 }
 
 - (void)retrieveNearbyUsers {
     [self.refreshControl beginRefreshing]; // manually show spinner, because it might be the first time we load
 
-    NSString *path = [NSString urlPath:NEARBY_SEARCH params:@{ LOCATION : self.location }];
+    NSString *path = [NSString urlPath:NEARBY_SEARCH params:@{LOCATION : self.location}];
     [self.httpClient get:path success:^(id json) {
-        self.nearbyResults = [json objectForKey:NEARBY];
-    } failure:nil finally:^{
+
+        NSArray *results = [json objectForKey:NEARBY];
+        NSMutableArray *nearbyList = [[NSMutableArray alloc] init];
+        for (id result in results) {[nearbyList addObject:[Nearby from:result]];}
+        self.nearbyList = nearbyList;
+
+    }            failure:nil finally:^{
         [self.refreshControl endRefreshing];
     }];
 }
 
 - (void)checkin {
-    NSString *path = [NSString urlPath:CHECKINS params:@{ USER_ID : [FBLoginService getLoggedInUser], LOCATION : self.location }];
+    NSString *path = [NSString urlPath:CHECKINS params:@{USER_ID : [FBLoginService getLoggedInUser].id, LOCATION : self.location}];
     [self.httpClient post:path success:nil failure:nil];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:PROFILE_SEGUE]) {
-        ProfileViewController *profileViewController = (ProfileViewController *) segue.destinationViewController;
-
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-
-        NSDictionary *item = [self.nearbyResults objectAtIndex:indexPath.row];
-        NSString *first = [[item objectForKey:USER] valueForKey:FIRST];
-        NSString *last = [[item objectForKey:USER] valueForKey:LAST];
-        NSString *user = [NSString stringWithFormat:@"%@ %@", first, last];
-        
-        profileViewController.user = user;
+        ProfileViewController *profileViewController = (ProfileViewController *) segue.destinationViewController;
+        profileViewController.user = ((Nearby *) [self.nearbyList objectAtIndex:indexPath.row]).user;
     }
 }
 
 #pragma mark - Table view data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.nearbyResults count];
+    return [self.nearbyList count];
 }
 
 #pragma mark - Table view delegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Nearby Cell"];
 
-    NSDictionary *item = [self.nearbyResults objectAtIndex:indexPath.row];
-    NSString *first = [[item objectForKey:USER] valueForKey:FIRST];
-    NSString *last = [[item objectForKey:USER] valueForKey:LAST];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", first, last];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@m away", [item objectForKey:DISTANCE]];
+    Nearby *nearby = [self.nearbyList objectAtIndex:indexPath.row];
+    cell.textLabel.text = nearby.user.name;
+    cell.detailTextLabel.text = nearby.distanceInWords;
     return cell;
 }
 

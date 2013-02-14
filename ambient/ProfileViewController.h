@@ -1,5 +1,6 @@
 #import <UIKit/UIKit.h>
+#import "User.h"
 
 @interface ProfileViewController : UIViewController
-@property(nonatomic, strong) NSString *user;
+@property(nonatomic, strong) User *user;
 @end

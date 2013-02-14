@@ -22,7 +22,7 @@
     return [FBLoginService getLoggedInUser] != nil;
 }
 
-+ (NSString *)getLoggedInUser {
++ (User *)getLoggedInUser {
     return ((AppDelegate *) [[UIApplication sharedApplication] delegate]).user;
 }
 
@@ -86,7 +86,7 @@
 }
 
 # pragma mark LoadUserProtocol
-- (void)userLoaded:(NSString *)user {
+- (void)userLoaded:(User *)user {
     ((AppDelegate *) [[UIApplication sharedApplication] delegate]).user = user;
     [self fireLoginSuccessful];
 }

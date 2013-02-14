@@ -4,7 +4,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = self.user;
+    self.navigationItem.title = self.user.name;
 }
 
 @end

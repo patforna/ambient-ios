@@ -1,4 +1,5 @@
 #import "AppDelegate.h"
+#import "User.h"
 #import <FacebookSDK/FacebookSDK.h>
 
 @implementation AppDelegate

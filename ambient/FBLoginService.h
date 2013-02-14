@@ -5,7 +5,7 @@
 @interface FBLoginService : NSObject <LoadUserProtocol>
 @property(weak) id <LoginProtocol> delegate;
 + (BOOL)isLoggedIn;
-+ (NSString *)getLoggedInUser;
++ (User *)getLoggedInUser;
 - (void)login;
 - (void)logout;
 @end

@@ -8,6 +8,7 @@
 #import "NSError+Extensions.h"
 #import "AFHTTPClient+Extensions.h"
 #import "NSString+Extensions.h"
+#import "User.h"
 
 @interface UserService ()
 @property(strong, nonatomic) AFHTTPClient *httpClient;
@@ -39,7 +40,7 @@
 - (void)loadUserFrom:(NSDictionary <FBGraphUser> *)fbUser {
     NSString *path = [NSString urlPath:USERS_SEARCH params:@{FBID : fbUser.id}];
     [self.httpClient get:path success:^(id json) {
-        [self handleUserLoaded:[self extractUserFrom:json]];
+        [self handleUserLoaded:[User from:json]];
     } failure:^(NSInteger *status, NSError *error) {
         if (status == NOT_FOUND) [self handleUserNotFound:fbUser]; else [self handleFailure:error];
     }];
@@ -48,7 +49,7 @@
 - (void)createUserFrom:(NSDictionary <FBGraphUser> *)fbUser {
     NSString *path = [NSString urlPath:USERS params:@{FIRST : fbUser.first_name, LAST : fbUser.last_name, FBID : fbUser.id}];
     [self.httpClient post:path success:^(id json) {
-        [self handleUserCreated:[self extractUserFrom:json]];
+        [self handleUserCreated:[User from:json]];
     } failure:^(NSInteger *status, NSError *error) {
         [self handleFailure:error];
     }];
@@ -61,12 +62,12 @@
     [self loadUserFrom:fbUser];
 }
 
-- (void)handleUserLoaded:(NSString *)user {
+- (void)handleUserLoaded:(User *)user {
     NSLog(@"Successfully loaded user");
     [self.delegate userLoaded:user];
 }
 
-- (void)handleUserCreated:(NSString *)user {
+- (void)handleUserCreated:(User *)user {
     NSLog(@"Successfully created user.");
     [self.delegate userLoaded:user];
 }
@@ -78,12 +79,6 @@
 
 - (void)handleFailure:(NSError *)error {
     [self.delegate failedToLoadUser:error];
-}
-
-#pragma helpers
-
-- (id)extractUserFrom:(id)json {
-    return [[json objectForKey:USER] valueForKey:ID];
 }
 
 @end
