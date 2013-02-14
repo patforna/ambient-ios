@@ -2,6 +2,9 @@
 #import "AFNetworking.h"
 #import "Constants.h"
 
+static NSString *const GET = @"GET";
+static NSString *const POST = @"POST";
+
 @implementation AFHTTPClient (Extensions)
 + (AFHTTPClient *)forAmbient {
     NSURL *baseURL = [NSURL URLWithString:BASE_URL];
@@ -16,40 +19,38 @@
 }
 
 - (void)get:(NSString *)path success:(SuccessBlock)success failure:(FailureBlock)failure finally:(FinallyBlock)finally {
-    NSLog(@"GET: %@%@\n", BASE_URL, path);
+    [self execute:GET path:path success:success failure:failure finally:finally];
+}
+
+- (void)post:(NSString *)path success:(SuccessBlock)success failure:(FailureBlock)failure {
+    [self execute:POST path:path success:success failure:failure finally:nil];
+}
+
+#pragma private
+- (void)execute:(NSString *)method path:(NSString *)path success:(SuccessBlock)success failure:(FailureBlock)failure finally:(FinallyBlock)finally {
+    NSLog(@"%@: %@%@\n", method, BASE_URL, path);
     [self showNetworkActivityIndicator];
 
-    [self getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id json) {
-        [self hideNetworkActivityIndicator]; // FIXME DRY
+    NSURLRequest *request = [self requestWithMethod:method path:path parameters:nil];
+    AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id json) {
         if (success) success(json);
+        [self hideNetworkActivityIndicator];
         if (finally) finally();
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"GET %@%@ failed: %@\n", BASE_URL, path, error.localizedDescription);
+        NSLog(@"%@ %@%@ failed: %@\n", method, BASE_URL, path, error.localizedDescription);
         [self hideNetworkActivityIndicator];
         if (failure) failure(operation.response.statusCode, error);
         if (finally) finally();
     }];
+
+    [self enqueueHTTPRequestOperation:operation];
 }
 
-- (void)post:(NSString *)path success:(SuccessBlock)success failure:(FailureBlock)failure {
-    NSLog(@"POST: %@%@\n", BASE_URL, path);
-    [self showNetworkActivityIndicator]; // FIXME DRY
-
-    [self postPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id json) {
-        if (success) success(json);
-        [self hideNetworkActivityIndicator]; // FIXME DRY
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"POST %@%@ failed: %@\n", BASE_URL, path, error.localizedDescription);
-        [self hideNetworkActivityIndicator]; // FIXME DRY
-        if (failure) failure(operation.response.statusCode, error);
-    }];
-}
-
-- (void) showNetworkActivityIndicator {
+- (void)showNetworkActivityIndicator {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:true];
 }
 
-- (void) hideNetworkActivityIndicator {
+- (void)hideNetworkActivityIndicator {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:false];
 }
 
