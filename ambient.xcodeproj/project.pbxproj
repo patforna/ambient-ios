@@ -505,14 +505,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E3A4A49BFCE9420D9CB5E8EC /* Pods.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Patric Fornasier (8LL6WV7NE6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Patric Fornasier (8LL6WV7NE6)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ambient/ambient-Prefix.pch";
 				INFOPLIST_FILE = "ambient/ambient-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "83502415-A74D-44EF-9C08-83DDF08ABEE2";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "83502415-A74D-44EF-9C08-83DDF08ABEE2";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -521,14 +521,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E3A4A49BFCE9420D9CB5E8EC /* Pods.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Patric Fornasier (8LL6WV7NE6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Patric Fornasier (8LL6WV7NE6)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ambient/ambient-Prefix.pch";
 				INFOPLIST_FILE = "ambient/ambient-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "83502415-A74D-44EF-9C08-83DDF08ABEE2";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "83502415-A74D-44EF-9C08-83DDF08ABEE2";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
