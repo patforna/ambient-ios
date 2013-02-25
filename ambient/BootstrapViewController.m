@@ -45,4 +45,11 @@
         [self performSegueWithIdentifier:NEARBY_SEGUE sender:self];
 }
 
+- (void)loginFailed:(NSError *)error {
+    NSLog(@"Login failed. Error: %@", error);
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Oops..." message:error.localizedDescription delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+    [alertView show];
+    [self performSegueWithIdentifier:LOGIN_SEGUE sender:self];
+}
+
 @end

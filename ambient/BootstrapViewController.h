@@ -2,5 +2,5 @@
 #import "LoginProtocol.h"
 #import "LoadUserProtocol.h"
 
-@interface BootstrapViewController : UIViewController <LoginProtocol, LoadUserProtocol>
+@interface BootstrapViewController : UIViewController <LoginProtocol>
 @end
