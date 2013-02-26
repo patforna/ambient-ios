@@ -1,5 +1,7 @@
 #import "User.h"
 #import "Constants.h"
+#import "FBSession.h"
+#import "NSString+Extensions.h"
 
 @implementation User
 + (User *)from:(id)json {
@@ -14,6 +16,14 @@
 
 - (NSString *)name {
     return [NSString stringWithFormat:@"%@ %@", self.first, self.last];
+}
+
+- (NSString *)pictureOfSize:(CGSize)size {
+    NSNumber * width = [NSNumber numberWithInt:size.width * [UIScreen mainScreen].scale];
+    NSNumber * height = [NSNumber numberWithInt:size.height * [UIScreen mainScreen].scale];
+    NSString * accessToken = FBSession.activeSession.accessToken;
+
+    return [NSString urlPath:self.picture params:@{WIDTH : width, HEIGHT : height, ACCESS_TOKEN : accessToken}];
 }
 
 @end

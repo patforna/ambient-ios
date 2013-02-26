@@ -17,6 +17,11 @@
 #define USER_ID @"user_id"
 #define DISTANCE @"distance"
 
+// === FACEBOOK URL PARAMETERS
+#define WIDTH @"width"
+#define HEIGHT @"height"
+#define ACCESS_TOKEN @"access_token"
+
 // === HTTP STATUS CODES
 #define NOT_FOUND 404
 
