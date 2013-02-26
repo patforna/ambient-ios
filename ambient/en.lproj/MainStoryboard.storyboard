@@ -128,18 +128,22 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="42v-wf-4Bv"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="eDZ-dF-BME"/>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="42v-wf-4Bv" firstAttribute="bottom" secondItem="Ssc-9W-DmB" secondAttribute="bottom" type="default" id="OoY-rI-t8l"/>
+                            <constraint firstItem="eDZ-dF-BME" firstAttribute="centerY" secondItem="42v-wf-4Bv" secondAttribute="centerY" type="default" id="f9p-AW-VEw"/>
                             <constraint firstItem="42v-wf-4Bv" firstAttribute="leading" secondItem="Ssc-9W-DmB" secondAttribute="leading" type="default" id="ixO-j5-vr6"/>
                             <constraint firstItem="42v-wf-4Bv" firstAttribute="top" secondItem="Ssc-9W-DmB" secondAttribute="top" type="default" id="kAA-wE-Izh"/>
                             <constraint firstItem="42v-wf-4Bv" firstAttribute="trailing" secondItem="Ssc-9W-DmB" secondAttribute="trailing" type="default" id="tD5-Lr-xvQ"/>
+                            <constraint firstItem="eDZ-dF-BME" firstAttribute="centerX" secondItem="42v-wf-4Bv" secondAttribute="centerX" type="default" id="ttA-oB-31J"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="6hX-Y1-rZm"/>
                     <connections>
                         <outlet property="image" destination="42v-wf-4Bv" id="E5l-QI-fcO"/>
+                        <outlet property="spinner" destination="eDZ-dF-BME" id="2ZL-Bo-DVl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tA3-KB-ZdK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -190,6 +194,7 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfileViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="image" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="spinner" candidateClass="UIActivityIndicatorView"/>
             </relationships>
         </class>
         <class className="UIRefreshControl" superclassName="UIControl">

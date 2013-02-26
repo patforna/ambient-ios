@@ -1,5 +1,5 @@
 #import "ProfileViewController.h"
-#import "AFNetworking.h"
+#import "UIImageView+Extensions.h"
 
 @implementation ProfileViewController
 
@@ -10,8 +10,7 @@
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    NSLog(@"Loading pic: %@", [self.user pictureOfSize:self.image.bounds.size]);
-    [self.image setImageWithURL:[NSURL URLWithString:[self.user pictureOfSize:self.image.bounds.size]]];
+    [self.image loadImage:[self.user pictureOfSize:self.image.bounds.size] finally:^{[self.spinner stopAnimating];}];
 }
 
 @end

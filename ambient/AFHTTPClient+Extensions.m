@@ -29,16 +29,16 @@ static NSString *const POST = @"POST";
 #pragma private
 - (void)execute:(NSString *)method path:(NSString *)path success:(SuccessBlock)success failure:(FailureBlock)failure finally:(FinallyBlock)finally {
     NSLog(@"%@: %@%@\n", method, BASE_URL, path);
-    [self showNetworkActivityIndicator];
+    showNetworkActivityIndicator();
 
     NSURLRequest *request = [self requestWithMethod:method path:path parameters:nil];
     AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id json) {
         if (success) success(json);
-        [self hideNetworkActivityIndicator];
+        hideNetworkActivityIndicator();
         if (finally) finally();
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@ %@%@ failed: %@\n", method, BASE_URL, path, error.localizedDescription);
-        [self hideNetworkActivityIndicator];
+        hideNetworkActivityIndicator();
         if (failure) failure(operation.response.statusCode, error);
         if (finally) finally();
     }];
@@ -46,11 +46,11 @@ static NSString *const POST = @"POST";
     [self enqueueHTTPRequestOperation:operation];
 }
 
-- (void)showNetworkActivityIndicator {
+static void showNetworkActivityIndicator() {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:true];
 }
 
-- (void)hideNetworkActivityIndicator {
+static void hideNetworkActivityIndicator() {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:false];
 }
 

@@ -29,6 +29,7 @@
 		4FE4AF2216A95080006E2915 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FE4AEFD16A95080006E2915 /* Foundation.framework */; };
 		4FE4AF2A16A95080006E2915 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4FE4AF2816A95080006E2915 /* InfoPlist.strings */; };
 		4FE4AF2D16A95080006E2915 /* ambientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FE4AF2C16A95080006E2915 /* ambientTests.m */; };
+		C4AC20C0225974419762BD86 /* UIImageView+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AC2FE3580679215DBADF20 /* UIImageView+Extensions.m */; };
 		C4AC239593DD4058FAB34BA7 /* Constants.h in Resources */ = {isa = PBXBuildFile; fileRef = C4AC24D5308376184A3B0F61 /* Constants.h */; };
 		C4AC248ED592E6776C576D17 /* Nearby.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AC286D53A867FD4E028472 /* Nearby.m */; };
 		C4AC251E881F972A9781B466 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AC259A4A15AFE38E2E3423 /* Location.m */; };
@@ -100,12 +101,14 @@
 		C4AC2771EAA53666A241859D /* UserService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserService.m; sourceTree = "<group>"; };
 		C4AC286D53A867FD4E028472 /* Nearby.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Nearby.m; path = ../Nearby.m; sourceTree = "<group>"; };
 		C4AC288B837D0196541AC934 /* LoginProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginProtocol.h; sourceTree = "<group>"; };
+		C4AC28AA0DFA4CAC7208041E /* UIImageView+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Extensions.h"; sourceTree = "<group>"; };
 		C4AC2934CADFF2C7F1A5D385 /* NSString+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extensions.m"; sourceTree = "<group>"; };
 		C4AC2949CD2A6B578BEC6860 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
 		C4AC296053C9D82355AB42B8 /* AFHTTPClient+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFHTTPClient+Extensions.h"; sourceTree = "<group>"; };
 		C4AC2A51112ADEF1B7DB1501 /* FBLoginService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLoginService.m; sourceTree = "<group>"; };
 		C4AC2C8521FCE206473324D6 /* UserService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserService.h; sourceTree = "<group>"; };
 		C4AC2FA1528C32AD8AE89C8E /* NSArray+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+Extensions.h"; path = "ambient/NSArray+Extensions.h"; sourceTree = "<group>"; };
+		C4AC2FE3580679215DBADF20 /* UIImageView+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Extensions.m"; sourceTree = "<group>"; };
 		E3A4A49BFCE9420D9CB5E8EC /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -220,6 +223,8 @@
 				C4AC209AA3EFE2A56FB659F0 /* AFHTTPClient+Extensions.m */,
 				C4AC227E33FE445095688820 /* User.m */,
 				C4AC20CFD9D609CDE5BF215D /* User.h */,
+				C4AC2FE3580679215DBADF20 /* UIImageView+Extensions.m */,
+				C4AC28AA0DFA4CAC7208041E /* UIImageView+Extensions.h */,
 			);
 			path = ambient;
 			sourceTree = "<group>";
@@ -402,6 +407,7 @@
 				C4AC2973499DF3649191656C /* User.m in Sources */,
 				C4AC248ED592E6776C576D17 /* Nearby.m in Sources */,
 				C4AC25D4935638742A831581 /* NSArray+Extensions.m in Sources */,
+				C4AC20C0225974419762BD86 /* UIImageView+Extensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
