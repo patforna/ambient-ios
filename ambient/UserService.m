@@ -10,7 +10,7 @@
 #import "NSString+Extensions.h"
 #import "User.h"
 
-static NSString *const FB_PICTURE_URL_TEMPLATE = @"%@/%@/picture?type=large";
+static NSString *const FB_PICTURE_URL_TEMPLATE = @"%@/%@/picture";
 
 @interface UserService ()
 @property(strong, nonatomic) AFHTTPClient *httpClient;
