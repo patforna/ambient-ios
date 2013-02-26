@@ -4,5 +4,5 @@
 @interface ProfileViewController : UIViewController
 @property(nonatomic, strong) User *user;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
-@property (weak, nonatomic) IBOutlet UIImageView *image;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @end

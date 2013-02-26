@@ -10,7 +10,7 @@
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    [self.image loadImage:[self.user pictureOfSize:self.image.bounds.size] finally:^{[self.spinner stopAnimating];}];
+    [self.imageView loadImage:[self.user pictureOfSize:self.imageView.bounds.size] finally:^{[self.spinner stopAnimating];}];
 }
 
 @end

@@ -142,7 +142,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="6hX-Y1-rZm"/>
                     <connections>
-                        <outlet property="image" destination="42v-wf-4Bv" id="E5l-QI-fcO"/>
+                        <outlet property="imageView" destination="42v-wf-4Bv" id="ved-p1-19C"/>
                         <outlet property="spinner" destination="eDZ-dF-BME" id="2ZL-Bo-DVl"/>
                     </connections>
                 </viewController>
