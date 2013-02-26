@@ -68,7 +68,7 @@
 - (void)retrieveNearbyUsers {
     [self.refreshControl beginRefreshing]; // manually show spinner, because it might be the first time we load
 
-    NSString *path = [NSString urlPath:NEARBY_SEARCH params:@{LOCATION : self.location}];
+    NSString *path = [NSString urlFor:NEARBY_SEARCH params:@{LOCATION : self.location}];
     [self.httpClient get:path success:^(id json) {
         self.nearbyList = [[json objectForKey:NEARBY] map:^(id x) {return [Nearby from:x];}];
     } failure:nil finally:^{
@@ -77,7 +77,7 @@
 }
 
 - (void)checkin {
-    NSString *path = [NSString urlPath:CHECKINS params:@{USER_ID : [FBLoginService getLoggedInUser].id, LOCATION : self.location}];
+    NSString *path = [NSString urlFor:CHECKINS params:@{USER_ID : [FBLoginService getLoggedInUser].id, LOCATION : self.location}];
     [self.httpClient post:path success:nil failure:nil];
 }
 

@@ -23,7 +23,7 @@
     NSNumber * height = [NSNumber numberWithInt:size.height * [UIScreen mainScreen].scale];
     NSString * accessToken = FBSession.activeSession.accessToken;
 
-    return [NSString urlPath:self.picture params:@{WIDTH : width, HEIGHT : height, ACCESS_TOKEN : accessToken}];
+    return [NSString urlFor:self.picture params:@{WIDTH : width, HEIGHT : height, ACCESS_TOKEN : accessToken}];
 }
 
 @end

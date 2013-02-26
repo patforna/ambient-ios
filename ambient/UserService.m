@@ -40,7 +40,7 @@ static NSString *const FB_PICTURE_URL_TEMPLATE = @"%@/%@/picture?type=large";
 }
 
 - (void)loadUserFrom:(NSDictionary <FBGraphUser> *)fbUser {
-    NSString *path = [NSString urlPath:USERS_SEARCH params:@{FBID : fbUser.id}];
+    NSString *path = [NSString urlFor:USERS_SEARCH params:@{FBID : fbUser.id}];
     [self.httpClient get:path success:^(id json) {
         [self handleUserLoaded:[User from:json]];
     } failure:^(NSInteger *status, NSError *error) {
@@ -49,7 +49,7 @@ static NSString *const FB_PICTURE_URL_TEMPLATE = @"%@/%@/picture?type=large";
 }
 
 - (void)createUserFrom:(NSDictionary <FBGraphUser> *)fbUser {
-    NSString *path = [NSString urlPath:USERS params:@{FIRST : fbUser.first_name, LAST : fbUser.last_name, FBID : fbUser.id, PICTURE : [self pictureUrlFor:fbUser]}];
+    NSString *path = [NSString urlFor:USERS params:@{FIRST : fbUser.first_name, LAST : fbUser.last_name, FBID : fbUser.id, PICTURE : [self pictureUrlFor:fbUser]}];
     [self.httpClient post:path success:^(id json) {
         [self handleUserCreated:[User from:json]];
     } failure:^(NSInteger *status, NSError *error) {
