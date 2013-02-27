@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="785d8c8f-58a7-4723-a3c1-feaaab6cf098" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ambient.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/ambient.xcodeproj/project.pbxproj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ambient/NearbyTableViewController.m" afterPath="$PROJECT_DIR$/ambient/NearbyTableViewController.m" />
     </list>
     <ignored path="ambient.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -24,30 +22,26 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="iphonesimulator_6.1_1" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="NSArray+Extensions.h" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ambient/NSArray+Extensions.h">
+      <file leaf-file-name="Constants.h" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ambient/Constants.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="33" selection-start="128" selection-end="128" vertical-scroll-proportion="0.0">
+            <state line="34" column="42" selection-start="1293" selection-end="1293" vertical-scroll-proportion="0.5166192">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NSArray+Extensions.m" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ambient/NSArray+Extensions.m">
+      <file leaf-file-name="UserService.m" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ambient/UserService.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="36" selection-start="253" selection-end="253" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NearbyTableViewController.m" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ambient/NearbyTableViewController.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="72" column="8" selection-start="2410" selection-end="2410" vertical-scroll-proportion="0.39506173">
+            <state line="17" column="54" selection-start="442" selection-end="442" vertical-scroll-proportion="0.0">
               <folding>
-                <element signature="e#0#24#0" expanded="true" />
+                <marker date="1361886732000" expanded="true" signature="470:2944" placeholder="..." />
+                <marker date="1361886732000" expanded="true" signature="501:597" placeholder="{...}" />
+                <marker date="1361886732000" expanded="true" signature="616:721" placeholder="{...}" />
+                <marker date="1361886732000" expanded="true" signature="749:1186" placeholder="{...}" />
+                <marker date="1361886732000" expanded="true" signature="995:1182" placeholder="^(FBRequestConnection *connection, NSDictionary &lt;FBGraphUser&gt; *fbUser, NSError *error){...}" />
+                <marker date="1361886732000" expanded="true" signature="1246:1591" placeholder="{...}" />
               </folding>
             </state>
           </provider>
@@ -69,10 +63,8 @@
         <option value="$PROJECT_DIR$/ambient/Location.m" />
         <option value="$PROJECT_DIR$/ambient/NSString+Extensions.h" />
         <option value="$PROJECT_DIR$/ambient/NSString+Extensions.m" />
-        <option value="$PROJECT_DIR$/ambient/UserService.m" />
         <option value="$PROJECT_DIR$/ambient/AFHTTPClient+Extensions.m" />
         <option value="$PROJECT_DIR$/ambient/LoginViewController.h" />
-        <option value="$PROJECT_DIR$/ambient/Constants.h" />
         <option value="$PROJECT_DIR$/ambient/ProfileViewController.h" />
         <option value="$PROJECT_DIR$/ambient/ProfileViewController.m" />
         <option value="$PROJECT_DIR$/ambient/LoginProtocol.h" />
@@ -82,6 +74,8 @@
         <option value="$PROJECT_DIR$/ambient/NSArray+Extensions.h" />
         <option value="$PROJECT_DIR$/ambient/NSArray+Extensions.m" />
         <option value="$PROJECT_DIR$/ambient/NearbyTableViewController.m" />
+        <option value="$PROJECT_DIR$/ambient/UserService.m" />
+        <option value="$PROJECT_DIR$/ambient/Constants.h" />
       </list>
     </option>
   </component>
@@ -220,16 +214,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="DirectoryView.Xcode">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ambient" />
-              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeDirectoryView$1$1" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -264,17 +248,28 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="DirectoryView.Xcode">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ambient" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeDirectoryView$1$1" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="options.lastSelected" value="preferences.sourceCode.Objective-C" />
     <property name="recentsLimit" value="5" />
+    <property name="options.lastSelected" value="preferences.sourceCode.Objective-C" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/ambient" />
+    <property name="FullScreen" value="false" />
     <property name="OBJC.PRESERVED_TARGET_SELECTION" value="ambient" />
-    <property name="GoToClass.includeJavaFiles" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
+    <property name="GoToClass.includeJavaFiles" value="false" />
   </component>
   <component name="RunManager" selected="Application.ambient">
     <configuration default="true" type="AppleRunConfiguration" factoryName="Application" PROJECT_NAME="Pods" TARGET_NAME="Pods" CONFIG_NAME="Debug" PASS_PARENT_ENVS="FALSE" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
@@ -399,23 +394,9 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Pods/AFNetworking/AFNetworking/AFHTTPClient.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="618" column="49" selection-start="27044" selection-end="27302" vertical-scroll-proportion="0.825">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ambient/LoginViewController.h">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="18" selection-start="339" selection-end="339" vertical-scroll-proportion="0.106362775">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ambient/Constants.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="36" selection-start="630" selection-end="630" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -483,20 +464,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ambient/NSArray+Extensions.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="33" selection-start="128" selection-end="128" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ambient/NSArray+Extensions.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="36" selection-start="253" selection-end="253" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ambient/AFHTTPClient+Extensions.m">
       <provider selected="true" editor-type-id="text-editor">
         <state line="34" column="20" selection-start="1441" selection-end="1441" vertical-scroll-proportion="0.4862298">
@@ -506,10 +473,43 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ambient/NearbyTableViewController.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="72" column="8" selection-start="2410" selection-end="2410" vertical-scroll-proportion="0.39506173">
+        <state line="74" column="35" selection-start="2559" selection-end="2559" vertical-scroll-proportion="0.045584045">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ambient/NSArray+Extensions.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="36" selection-start="253" selection-end="253" vertical-scroll-proportion="0.09116809">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ambient/NSArray+Extensions.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="33" selection-start="128" selection-end="128" vertical-scroll-proportion="0.07597341">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ambient/UserService.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="54" selection-start="442" selection-end="442" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="e#0#24#0" expanded="true" />
+            <marker date="1361886732000" expanded="true" signature="470:2944" placeholder="..." />
+            <marker date="1361886732000" expanded="true" signature="501:597" placeholder="{...}" />
+            <marker date="1361886732000" expanded="true" signature="616:721" placeholder="{...}" />
+            <marker date="1361886732000" expanded="true" signature="749:1186" placeholder="{...}" />
+            <marker date="1361886732000" expanded="true" signature="995:1182" placeholder="^(FBRequestConnection *connection, NSDictionary &lt;FBGraphUser&gt; *fbUser, NSError *error){...}" />
+            <marker date="1361886732000" expanded="true" signature="1246:1591" placeholder="{...}" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ambient/Constants.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="42" selection-start="1293" selection-end="1293" vertical-scroll-proportion="0.5166192">
+          <folding />
         </state>
       </provider>
     </entry>
